@@ -1,0 +1,10 @@
+{"type": "ris_message", "data": {"timestamp": 1760000000, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 1299, 13335], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000005, "host": "rrc01", "peer_asn": "2914", "type": "UPDATE", "path": [2914, 13335], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000010, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 15169], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["8.8.8.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000060, "host": "rrc03", "peer_asn": "6939", "type": "UPDATE", "path": [6939, 64666], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000061, "host": "rrc04", "peer_asn": "1299", "type": "UPDATE", "path": [1299, 64666], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000070, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 174, 65001], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["203.0.113.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000080, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 3356, 65002], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["203.0.113.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000090, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 3356, [65010, 65011]], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["198.51.100.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000100, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 174, 15169], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["8.8.8.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760007300, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 1299, 13335], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["1.1.1.0/24"]}]}}
