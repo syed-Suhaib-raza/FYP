@@ -38,15 +38,13 @@ with each withdrawal / path change and decays over time raises an alert.
     python ris_live.py --whitelist whitelist.json                 # terminal 1
     python -m streamlit run dashboard.py                          # terminal 2
 
-## The rule (RFC 2439 penalty with decay, used only to detect)
+## The rule ( penalty with decay, used only to detect)
 One penalty per (prefix, peer session):
 - route withdrawn: +1000
 - route re-announced with a different AS path: +500 (same path again is free)
 - penalty halves every 15 minutes (`--half-life 900`)
 - penalty >= 2000 (`--suppress`): **FLAP alert**; penalty < 750 (`--reuse`): **CLEARED** (the gap stops alert chatter)
-- capped at 12000; a peer session going down is NOT a flap (routes are forgotten, nothing is charged)
-- `--min-peers N`: alert only when N sessions flap the same prefix (default 1)
-So one blip never alerts, 2 to 3 withdrawals within minutes do, and slow flapping (one per 30 min) decays away.
+
 
 ## Severity
 - high: the prefix is inside a whitelisted (monitored) prefix in `whitelist.json` (more-specifics count)
