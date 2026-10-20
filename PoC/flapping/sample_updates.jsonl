@@ -1,0 +1,31 @@
+{"type": "ris_message", "data": {"timestamp": 1760000000, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 13335], "announcements": [{"prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000000, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "path": [1299, 13335], "announcements": [{"prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000000, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 15169], "announcements": [{"prefixes": ["8.8.8.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000000, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 3257], "announcements": [{"prefixes": ["66.167.15.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000000, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "path": [1299, 64500], "announcements": [{"prefixes": ["203.0.113.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000000, "peer": "192.0.2.30", "peer_asn": "6762", "host": "rrc02", "type": "UPDATE", "path": [6762, 13335], "announcements": [{"prefixes": ["2606:4700:4700::/48"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000060, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 3257], "announcements": [{"prefixes": ["66.167.15.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000100, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "withdrawals": ["1.1.1.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000120, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 174, 3257], "announcements": [{"prefixes": ["66.167.15.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000160, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 13335], "announcements": [{"prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000180, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 3257], "announcements": [{"prefixes": ["66.167.15.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000200, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "withdrawals": ["203.0.113.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000220, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "withdrawals": ["1.1.1.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000240, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 174, 3257], "announcements": [{"prefixes": ["66.167.15.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000240, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "path": [1299, 64500], "announcements": [{"prefixes": ["203.0.113.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000280, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 13335], "announcements": [{"prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000300, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "withdrawals": ["1.1.1.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000300, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 3257], "announcements": [{"prefixes": ["66.167.15.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000300, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "withdrawals": ["203.0.113.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000330, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "path": [1299, 13335], "announcements": [{"prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000340, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "withdrawals": ["1.1.1.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000340, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "path": [1299, 64500], "announcements": [{"prefixes": ["203.0.113.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000400, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 1299, 13335], "announcements": [{"prefixes": ["1.1.1.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000400, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "withdrawals": ["203.0.113.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000400, "peer": "192.0.2.30", "peer_asn": "6762", "host": "rrc02", "type": "RIS_PEER_STATE", "state": "down"}}
+{"type": "ris_message", "data": {"timestamp": 1760000401, "peer": "192.0.2.30", "peer_asn": "6762", "host": "rrc02", "type": "UPDATE", "withdrawals": ["2606:4700:4700::/48"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000440, "peer": "192.0.2.20", "peer_asn": "1299", "host": "rrc01", "type": "UPDATE", "path": [1299, 64500], "announcements": [{"prefixes": ["203.0.113.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000500, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "withdrawals": ["8.8.8.0/24"]}}
+{"type": "ris_message", "data": {"timestamp": 1760000560, "peer": "192.0.2.10", "peer_asn": "3333", "host": "rrc00", "type": "UPDATE", "path": [3333, 15169], "announcements": [{"prefixes": ["8.8.8.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000700, "peer": "192.0.2.30", "peer_asn": "6762", "host": "rrc02", "type": "RIS_PEER_STATE", "state": "up"}}
+{"type": "ris_message", "data": {"timestamp": 1760000710, "peer": "192.0.2.30", "peer_asn": "6762", "host": "rrc02", "type": "UPDATE", "path": [6762, 13335], "announcements": [{"prefixes": ["2606:4700:4700:0:0:0:0:0/48"]}]}}
