@@ -1,0 +1,7 @@
+# fake CAIDA-format sample: provider|customer|-1 ; peer|peer|0 ; sibling|sibling|1
+13335|64500|-1|bgp
+13335|64501|1|bgp
+174|13335|0|bgp
+1299|13335|0|bgp
+3333|1299|-1|bgp
+15169|64999|-1|bgp
