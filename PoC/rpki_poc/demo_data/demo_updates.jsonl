@@ -1,0 +1,20 @@
+# 1. Normal: Cybernet announces its /22 and a /23 -> both VALID, no alert
+{"type":"ris_message","data":{"timestamp":1792573200.0,"peer":"192.0.2.1","peer_asn":"3356","id":"demo-1","host":"rrc00","type":"UPDATE","path":[3356,9541],"announcements":[{"next_hop":"192.0.2.1","prefixes":["198.18.0.0/22","198.18.0.0/23"]}]}}
+# 2. INVALID_ML: Cybernet announces a /24 but its ROA allows only up to /23
+{"type":"ris_message","data":{"timestamp":1792573210.0,"peer":"192.0.2.1","peer_asn":"3356","id":"demo-2","host":"rrc00","type":"UPDATE","path":[3356,9541],"announcements":[{"next_hop":"192.0.2.1","prefixes":["198.18.1.0/24"]}]}}
+# 3. The same /24 seen at a second collector -> no new alert, seen_by_peers becomes 2
+{"type":"ris_message","data":{"timestamp":1792573220.0,"peer":"192.0.2.2","peer_asn":"1299","id":"demo-3","host":"rrc21","type":"UPDATE","path":[1299,9541],"announcements":[{"next_hop":"192.0.2.2","prefixes":["198.18.1.0/24"]}]}}
+# 4. INVALID_AS: AS64511 originates Cybernet's exact /22 (possible hijack)
+{"type":"ris_message","data":{"timestamp":1792573230.0,"peer":"192.0.2.3","peer_asn":"174","id":"demo-4","host":"rrc00","type":"UPDATE","path":[174,64511],"announcements":[{"next_hop":"192.0.2.3","prefixes":["198.18.0.0/22"]}]}}
+# 5. INVALID_AS_AND_ML: AS64511 originates a /24 inside Cybernet's /22
+{"type":"ris_message","data":{"timestamp":1792573240.0,"peer":"192.0.2.3","peer_asn":"174","id":"demo-5","host":"rrc00","type":"UPDATE","path":[174,64511],"announcements":[{"next_hop":"192.0.2.3","prefixes":["198.18.2.0/24"]}]}}
+# 6. INVALID_AS (Cybernet side): AS9541 originates a customer prefix whose ROA names AS64500
+{"type":"ris_message","data":{"timestamp":1792573250.0,"peer":"192.0.2.1","peer_asn":"3356","id":"demo-6","host":"rrc00","type":"UPDATE","path":[3356,9541],"announcements":[{"next_hop":"192.0.2.1","prefixes":["198.18.12.0/24"]}]}}
+# 7. NOT_FOUND and unrelated: no ROA covers 198.51.100.0/24 -> ignored
+{"type":"ris_message","data":{"timestamp":1792573260.0,"peer":"192.0.2.1","peer_asn":"3356","id":"demo-7","host":"rrc00","type":"UPDATE","path":[3356,64511],"announcements":[{"next_hop":"192.0.2.1","prefixes":["198.51.100.0/24"]}]}}
+# 8. VALID and unrelated: another network's correct route -> ignored
+{"type":"ris_message","data":{"timestamp":1792573270.0,"peer":"192.0.2.1","peer_asn":"3356","id":"demo-8","host":"rrc00","type":"UPDATE","path":[3356,64496],"announcements":[{"next_hop":"192.0.2.1","prefixes":["203.0.113.0/24"]}]}}
+# 9. The peer that carried the hijacked /22 withdraws it -> alert RESOLVED
+{"type":"ris_message","data":{"timestamp":1792573280.0,"peer":"192.0.2.3","peer_asn":"174","id":"demo-9","host":"rrc00","type":"UPDATE","withdrawals":["198.18.0.0/22"]}}
+# 10. One of two peers withdraws the invalid /24 -> alert stays ACTIVE (rrc21 still sees it)
+{"type":"ris_message","data":{"timestamp":1792573290.0,"peer":"192.0.2.1","peer_asn":"3356","id":"demo-10","host":"rrc00","type":"UPDATE","withdrawals":["198.18.1.0/24"]}}
