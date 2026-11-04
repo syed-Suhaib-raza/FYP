@@ -1,0 +1,9 @@
+{"type": "ris_message", "data": {"timestamp": 1760000200, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 1299, 3320], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["77.77.77.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000210, "host": "rrc01", "peer_asn": "6939", "type": "UPDATE", "path": [6939, 3320, 6830], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["77.77.77.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000220, "host": "rrc03", "peer_asn": "2914", "type": "UPDATE", "path": [2914, 3320, 6830], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["77.77.77.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000300, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 1299, 3320], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["5.5.5.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000310, "host": "rrc01", "peer_asn": "2914", "type": "UPDATE", "path": [2914, 3356, 6830], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["5.5.5.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000320, "host": "rrc03", "peer_asn": "6939", "type": "UPDATE", "path": [6939, 174, 6830], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["5.5.5.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000400, "host": "rrc00", "peer_asn": "3333", "type": "UPDATE", "path": [3333, 3257], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["66.167.90.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000450, "host": "rrc04", "peer_asn": "6939", "type": "UPDATE", "path": [6939, 1299, 4637], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["66.167.90.0/24"]}]}}
+{"type": "ris_message", "data": {"timestamp": 1760000455, "host": "rrc03", "peer_asn": "2914", "type": "UPDATE", "path": [2914, 1299, 4637], "announcements": [{"next_hop": "10.0.0.1", "prefixes": ["66.167.90.0/24"]}]}}
