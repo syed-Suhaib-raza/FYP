@@ -1,0 +1,13 @@
+websockets
+streamlit
+pandas
+pytest
+huggingface_hub
+psutil
+# LLM: install the CPU build of torch first (README step 2); it is also needed by the GGUF converter and the tokenizer on the CPU route
+torch
+transformers>=4.43,<5
+# Hugging Face route only (NVIDIA GPU, or >=20 GB RAM):
+peft>=0.10,<1
+accelerate
+# 4-bit CPU route (no GPU, 16 GB RAM) is installed by:  python cpu_setup.py --install-deps

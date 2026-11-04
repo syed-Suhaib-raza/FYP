@@ -1,0 +1,19 @@
+# SYNTHETIC demo relationships, CAIDA format  as1|as2|rel  (-1: as1 is provider of as2, 0: peers). Use a real CAIDA file in production.
+17557|9541|-1|demo
+3356|17557|-1|demo
+3356|9541|-1|demo
+3356|15169|-1|demo
+17557|15169|-1|demo
+1299|3356|0|demo
+2914|3356|0|demo
+6762|17557|-1|demo
+174|3356|0|demo
+6939|3356|0|demo
+3356|64500|-1|demo
+1299|64500|-1|demo
+3356|64501|-1|demo
+64501|6939|0|demo
+64502|17557|0|demo
+64502|2914|0|demo
+64504|17557|0|demo
+1299|64504|-1|demo
