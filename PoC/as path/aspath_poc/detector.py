@@ -100,6 +100,8 @@ class Baseline:
         self.lengths = defaultdict(list)            # watch key -> path lengths seen
         self.paths = defaultdict(Counter)           # watch key -> {"AS AS AS": times seen}
         self.nobs = Counter()                       # watch key -> announcements learned
+        self.meta = {}                              # how the baseline was built (history.py fills it): source, built time, window, snapshots
+        self.known, self.known_floor = None, 2      # optional callable(a, b): link listed by CAIDA -> counts as at least known_floor (history mode)
 
     def learn(self, key, path):
         for a, b in zip(path, path[1:]):
@@ -109,7 +111,12 @@ class Baseline:
         self.lengths[key].append(len(path)); self.paths[key][" ".join(map(str, path))] += 1; self.nobs[key] += 1
 
     def support(self, a, b):
-        return self.edges.get(edge(a, b), 0)
+        n = self.edges.get(edge(a, b), 0)
+        return max(n, self.known_floor) if self.known and self.known(a, b) else n
+
+    def upstream_support(self, key, up, origin):
+        n = self.upstreams[key].get(up, 0)
+        return max(n, self.known_floor) if self.known and self.known(up, origin) else n
 
     def typical_path(self, key):
         c = self.paths.get(key)
@@ -120,7 +127,7 @@ class Baseline:
 
     def save(self, path):
         json.dump(dict(edges=[[a, b, n] for (a, b), n in self.edges.items()], upstreams={k: dict(v) for k, v in self.upstreams.items()},
-                       lengths=self.lengths, paths={k: dict(v) for k, v in self.paths.items()}, nobs=dict(self.nobs)), open(path, "w"))
+                       lengths=self.lengths, paths={k: dict(v) for k, v in self.paths.items()}, nobs=dict(self.nobs), meta=self.meta), open(path, "w"))
 
     def load(self, path):
         if not os.path.exists(path):
@@ -134,7 +141,7 @@ class Baseline:
             self.lengths[k].extend(v)
         for k, v in d["paths"].items():
             self.paths[k].update(v)
-        self.nobs.update(d["nobs"])
+        self.nobs.update(d["nobs"]); self.meta = d.get("meta", {})
         return sum(self.nobs.values()) > 0
 
     def stats(self):
@@ -171,6 +178,8 @@ class PathCandidates:
         if msg.get("type") != "UPDATE" or not origin_ok(msg.get("path")):
             return []
         path, out = flat(msg["path"]), []
+        if "GLOBAL" in self.watch:                           # --scope all: every announcement is checked (valley rule only; no per-prefix parsing, the feed is a firehose)
+            return [("GLOBAL", p, path, ann) for ann in msg.get("announcements") or [] for p in ann.get("prefixes", [])]
         for ann in msg.get("announcements") or []:
             for p in ann.get("prefixes", []):
                 prefix = norm(p)
@@ -186,7 +195,7 @@ class PathCandidates:
     def check(self, key, prefix, path):
         """-> ('deferred'|'nobaseline'|'clean'|'candidate', hits). hits: list of dict(rule, detail, **data)."""
         net, exp = self.watch[key]
-        if path[-1] not in exp and self.origin_policy == "authorized":
+        if path[-1] not in exp and self.origin_policy == "authorized" and key != "GLOBAL":
             return "deferred", []
         hits = []
         v = valley(path, self.rel) if "valley_violation" in self.enabled else None
@@ -203,7 +212,7 @@ class PathCandidates:
                              detail="; ".join(f"AS{a}-AS{b} " + ("never" if n == 0 else "rarely") + " observed in the baseline" for a, b, n in bad)))
         if len(path) > 1 and "new_origin_upstream" in self.enabled:
             up = path[-2]
-            if self.base.upstreams[key].get(up, 0) < self.min_support:
+            if self.base.upstream_support(key, up, path[-1]) < self.min_support:
                 hits.append(dict(rule="new_origin_upstream", cause=(up, path[-1]), data=up,
                                  detail=f"AS{up} was not seen next to origin AS{path[-1]} for {key} (baseline upstreams: "
                                         + (", ".join(f"AS{a}" for a, _ in self.base.upstreams[key].most_common(4)) or "none") + ")"))
@@ -217,6 +226,7 @@ class PathCandidates:
 
     def candidate(self, msg, ann, key, prefix, path, hits):
         net, exp = self.watch[key]
+        exp = exp or {path[-1]}                              # GLOBAL scope has no expected-origin list
         primary = [h["rule"] for h in hits if RULES[h["rule"]]["role"] == "primary"]
         sub = next(r for r in PRECEDENCE if r in primary)
         main = next(h for h in hits if h["rule"] == sub)

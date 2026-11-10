@@ -136,7 +136,7 @@ class Correlator:
         self.open, self.seen, self.recovered = {}, {}, []
 
     def ik(self, c):
-        return (c["key"], "*" if c["key"].startswith("AS") else c["prefix"], c["subtype"], tuple(map(str, c["cause"])))
+        return (c["key"], "*" if c["key"].startswith("AS") or c["key"] == "GLOBAL" else c["prefix"], c["subtype"], tuple(map(str, c["cause"])))
 
     def is_open(self, c):
         return self.ik(c) in self.open

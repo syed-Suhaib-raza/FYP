@@ -1,12 +1,4 @@
-"""Get the real CAIDA AS-relationship file (public data, free; no Cybernet account needed).
-
-    python aspath.py caida          # downloads the newest *.as-rel2.txt.bz2 into ./data  (about 2 MB)
-
-`python aspath.py live` then uses the newest file in ./data automatically (unless you pass --as-rel yourself).
-`python aspath.py demo` keeps the small synthetic demo_as_rel.txt on purpose: the synthetic demo data only works with it.
-Source: https://data.caida.org/datasets/as-relationships/serial-2/   When you cite it (CAIDA's terms of use):
-  "The CAIDA AS Relationships Dataset, <date used>, https://www.caida.org/catalog/datasets/as-relationships/"
-"""
+"""Get the real CAIDA AS-relationship file (public data, free)."""
 import glob, os, re, sys, urllib.request
 
 URL = "https://data.caida.org/datasets/as-relationships/serial-2/"
@@ -15,13 +7,11 @@ PATTERN = re.compile(r"(\d{8}\.as-rel2\.txt\.bz2)")
 
 
 def newest(index_html):
-    """Newest file name in CAIDA's directory listing (names start with the date YYYYMMDD), or None."""
     names = PATTERN.findall(index_html or "")
     return max(names) if names else None
 
 
 def local(folder=DIR):
-    """Newest CAIDA file already on disk in `folder` (.as-rel2.txt.bz2 or .as-rel2.txt), or None."""
     files = glob.glob(os.path.join(folder, "*.as-rel2.txt.bz2")) + glob.glob(os.path.join(folder, "*.as-rel2.txt"))
     return max(files, key=os.path.basename) if files else None
 
@@ -31,7 +21,6 @@ def _get(url):
 
 
 def download(folder=DIR):
-    """Download the newest file into `folder` (skipped if it is already there). Returns its path."""
     os.makedirs(folder, exist_ok=True)
     try:
         name = newest(_get(URL).read().decode("utf-8", "replace"))

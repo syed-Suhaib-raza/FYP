@@ -5,6 +5,7 @@
     python aspath.py download                      # one-time: download Llama-3.1-8B-Instruct (~16 GB), needs HF_TOKEN
     python aspath.py caida                         # download the real CAIDA AS-relationship file (~2 MB, public) into ./data
     python aspath.py demo --llm hf                 # + the model, called exactly like the unexpectedOrigin PoC calls it
+    python aspath.py history                       # build baseline.json from RIPEstat routing history (no learning window)
     python aspath.py learn history.jsonl           # build baseline.json from earlier updates (instead of a live learning window)
     python aspath.py live --llm hf --learn 900     # RIPE RIS Live for the prefixes in whitelist.json and the ASNs in watch_asns.json
     python aspath.py watch add 72.255.64.0/18 --origin 9541     # NOC edits the watch list (add / remove / add-asn / remove-asn / list)
@@ -34,12 +35,13 @@ class Monitor:
     """Feeds RIS-Live-shaped messages through the stages. Learning window first (baseline only), then detection."""
 
     def __init__(self, store=None, whitelist=None, asrel=None, llm=None, asns=(), learn=600, source="online", style="repo", top_k=8, cooldown=600,
-                 min_support=1, len_delta=3, origin_policy="authorized", ownership=True, history=True, base=None, enabled=None):
+                 min_support=1, len_delta=3, origin_policy="authorized", ownership=True, history=True, base=None, enabled=None, max_llm_per_min=0):
         self.asrel, self.llm, self.style, self.top_k, self.cooldown = asrel or ASRel(), llm, style, top_k, cooldown
         self.ownership, self.history, self.learn, self.t0 = ownership, history, learn, None
         self.base = base or Baseline()
         self.det = PathCandidates(whitelist or {}, self.asrel, self.base, asns, min_support, len_delta, origin_policy, enabled)
         self.corr = Correlator(store, source, style)
+        self.max_llm_per_min, self._llm_times = max_llm_per_min, []     # 0 = unlimited; over the limit an alert is raised with rules only (severity medium), never dropped
         self.cache = {}                                      # (prefix, path) -> (ts, result): the 'cooldown' of unexpectedOrigin = seconds before re-classifying
         self.stats = {"updates": 0, "learned": 0, "candidates": 0, "deferred_origin": 0, "llm_calls": 0}
 
@@ -60,6 +62,12 @@ class Monitor:
         ck = (cand["prefix"], tuple(cand["path"]))
         if ck in self.cache and now - self.cache[ck][0] < self.cooldown:
             return self.cache[ck][1]
+        if self.llm and self.max_llm_per_min:
+            self._llm_times = [t for t in self._llm_times if time.time() - t < 60]
+            if len(self._llm_times) >= self.max_llm_per_min:
+                self.stats["llm_skipped"] = self.stats.get("llm_skipped", 0) + 1
+                res = rules_only(cand, self.asrel, self.base, self.top_k, self.ownership, self.history); self.cache[ck] = (now, res); return res
+            self._llm_times.append(time.time())
         if self.llm:
             res = classify(cand, self.asrel, self.llm, self.base, self.top_k, self.ownership, self.history, self.style); self.stats["llm_calls"] += 1
         else:
@@ -143,18 +151,22 @@ async def live(mon, a):
     if a.prefix:
         wl = {p: wl.get(p, []) for p in a.prefix}
     mon.set_watch(wl, asns)
+    first = subscriptions(wl, asns)
+    if a.scope == "all":                                     # every update, leak rule only
+        mon.det.watch = {"GLOBAL": (None, set())}; mon.learn = 0; mon.ownership = False; wl, asns = {}, []
+        first = [{"type": "UPDATE", "socketOptions": {"includeRaw": False}, **({"host": a.collector} if a.collector else {})}]
     while True:
         try:
             async with websockets.connect(URL, ping_interval=30) as ws:
-                for s in subscriptions(wl, asns):
+                for s in first:
                     await ws.send(json.dumps({"type": "ris_subscribe", "data": s}))
-                print(f"connected to RIS Live, watching prefixes {list(wl)} and ASNs {asns}", flush=True)
+                print("connected to RIS Live, " + (f"checking ALL updates{' from ' + a.collector if a.collector else ''} (leak rule only)" if a.scope == "all" else f"watching prefixes {list(wl)} and ASNs {asns}"), flush=True)
                 while True:
                     try:
                         raw = await asyncio.wait_for(ws.recv(), 15)
                     except asyncio.TimeoutError:
                         raw = None
-                    if time.time() - chk >= 15 and (mt(a.whitelist), mt(a.asns)) != stamp:    # NOC edited the watch list (FR7): reload without restart
+                    if a.scope != "all" and time.time() - chk >= 15 and (mt(a.whitelist), mt(a.asns)) != stamp:    # NOC edited the watch list (FR7): reload without restart
                         chk, stamp = time.time(), (mt(a.whitelist), mt(a.asns))
                         new_wl, new_asns = load_watch(a.whitelist, a.asns)
                         mon.set_watch(new_wl, new_asns)
@@ -199,6 +211,17 @@ def common():
     c.add_argument("--asns", default="watch_asns.json", help="monitored ASNs (all prefixes they originate)"); c.add_argument("--db", default="aspath.db")
     c.add_argument("--as-rel", default=DEMO_ASREL, help="CAIDA as-rel file (.txt/.bz2); default: the tiny SYNTHETIC demo file (live mode prefers the newest file in ./data, get it with: python aspath.py caida)")
     c.add_argument("--baseline", default="baseline.json"); c.add_argument("--learn", type=int, default=600, help="learning window, seconds of feed time")
+    c.add_argument("--baseline-source", choices=["history", "learn"], default="history", help="live/history: history = routing history from RIPEstat before start (no learning window; falls back to learn if RIPEstat is unreachable); learn = live window")
+    c.add_argument("--history-days", type=int, default=60); c.add_argument("--history-snapshots", type=int, default=12, help="snapshots sampled across the window"); c.add_argument("--embargo-days", type=int, default=3, help="skip the most recent days so a fresh attack is not in the baseline")
+    c.add_argument("--min-snapshots", type=int, default=3, help="a link is ESTABLISHED if seen in at least this many snapshots ..."); c.add_argument("--min-peers", type=int, default=3, help="... from at least this many RIS peers ...")
+    c.add_argument("--min-span-days", type=int, default=10, help="... and the snapshots are at least this many days apart (a short attack cannot satisfy this)")
+    c.add_argument("--as-of", default=None, help="YYYY-MM-DD: build the history as it was on that date (replaying an old incident)"); c.add_argument("--history-dir", default="data/history")
+    c.add_argument("--history-max-age-hours", type=int, default=24, help="live: reuse baseline.json if it was built from history less than this many hours ago (no RIPEstat calls)")
+    c.add_argument("--history-rrcs", default=None, help="history: only these RIS collectors, e.g. 0,1,3 (smaller answers; use if an ASN watch times out)")
+    c.add_argument("--caida-known", action=argparse.BooleanOptionalAction, default=True, help="a link listed in CAIDA counts as known (history mode)")
+    c.add_argument("--scope", choices=["watch", "all"], default="watch", help="live: watch = prefixes/ASNs in the watch list (history baseline); all = EVERY update from RIS Live, valley (route-leak) rule only, no baseline")
+    c.add_argument("--collector", default=None, help="live --scope all: only this RIS collector, e.g. rrc00 (less load than the whole feed)")
+    c.add_argument("--max-llm-per-min", type=int, default=0, help="cap model calls per minute (0 = unlimited; --scope all defaults to 3 because the model needs ~17 s per alert on CPU)")
     c.add_argument("--min-support", type=int, default=1, help="an AS link seen fewer times than this in the baseline is 'new' (1 = never seen; 2 = never or rarely seen, Fig. 4 wording)")
     c.add_argument("--len-delta", type=int, default=3, help="path_length_deviation: hops away from the baseline median")
     c.add_argument("--origin-policy", choices=["authorized", "any"], default="authorized", help="authorized: announcements from a non-authorised origin are left to the unexpectedOrigin PoC")
@@ -242,11 +265,37 @@ def use_real_asrel(a, folder=caida.DIR):
     return a
 
 
+def history_baseline(a, mon, force=False):
+    """Fill mon.base from RIPEstat history. True = used (learning window switched off), False = unreachable (caller keeps the learning window)."""
+    import calendar, history
+    history.RRCS = a.history_rrcs
+    now = calendar.timegm(time.strptime(a.as_of, "%Y-%m-%d")) if a.as_of else time.time()
+    if a.caida_known and mon.asrel.rel and a.as_rel != DEMO_ASREL:
+        mon.base.known = lambda x, y: mon.asrel.pair(x, y) is not None
+    if not force and not a.as_of and os.path.exists(a.baseline):          # fresh enough? reuse it instead of asking RIPEstat again
+        try:
+            m = json.load(open(a.baseline)).get("meta", {})
+        except (ValueError, OSError):
+            m = {}
+        age = time.time() - m.get("built", 0)
+        if m.get("source") == "history" and age < a.history_max_age_hours * 3600 and set(m.get("watch", [])) == set(mon.det.watch) and mon.base.load(a.baseline):
+            mon.learn = 0; mon.det.min_support = max(mon.det.min_support, 2)
+            print(f"reusing history baseline built {age / 3600:.1f} h ago ({m.get('links_established')} established links); 'python aspath.py history' rebuilds it", flush=True)
+            return True
+    n = history.fill(mon.base, mon.det.watch, now, a.history_days, a.history_snapshots, a.embargo_days, a.min_snapshots, a.min_peers, a.min_span_days, a.history_dir)
+    if n:
+        mon.learn = 0; mon.det.min_support = max(mon.det.min_support, 2)       # established links have count >= 2
+    else:
+        print("WARNING: no history available, falling back to the live learning window (an attack inside it would be learned as normal).", flush=True)
+    return bool(n)
+
+
 def main(argv=None):
     c = common()
     p = argparse.ArgumentParser(description="AS-path anomaly PoC"); sub = p.add_subparsers(dest="mode", required=True)
     d = sub.add_parser("demo", parents=[c]); d.add_argument("file", nargs="?", default="sample_updates.jsonl")
     ln = sub.add_parser("learn", parents=[c]); ln.add_argument("file")
+    sub.add_parser("history", parents=[c])
     l = sub.add_parser("live", parents=[c]); l.add_argument("--prefix", action="append")
     sub.add_parser("download", parents=[c]); sub.add_parser("rules", parents=[c]); sub.add_parser("caida", parents=[c])
     w = sub.add_parser("watch", parents=[c]); w.add_argument("action", choices=["list", "add", "remove", "add-asn", "remove-asn"])
@@ -261,22 +310,34 @@ def main(argv=None):
         caida.download(); return
     if a.mode == "watch":
         return watch_cmd(a)
-    if a.mode == "live":
+    if a.mode in ("live", "history"):
         use_real_asrel(a)
+    if a.mode == "history":                                  # build baseline.json from RIPEstat history and show what is NOT established
+        import history; a.llm = "none"; mon = build(a, "history")
+        if history_baseline(a, mon, force=True):
+            mon.save_baseline(a.baseline); print(f"baseline saved to {a.baseline}:", mon.base.stats(), mon.base.meta)
+            print("rarest links (seen in history but not established; look here first):", history.rarest(mon.base))
+        return
     if a.mode == "learn":                                    # historical bootstrap: every authorised-origin announcement in the file becomes baseline
         a.llm = "none"; mon = build(a, "learn"); mon.learn = 10 ** 12
         for line in open(a.file):
             mon.process(json.loads(line)["data"])
         mon.save_baseline(a.baseline); print(f"baseline saved to {a.baseline}:", mon.base.stats()); return
     mon = build(a, "demo" if a.mode == "demo" else "online")
-    if a.mode == "live":
-        mon.load_baseline(a.baseline)
+    if a.mode == "live" and a.scope == "all":
+        a.max_llm_per_min = a.max_llm_per_min or 3
+    mon.max_llm_per_min = a.max_llm_per_min if a.mode == "live" else 0
+    if a.mode == "live" and a.scope != "all":
+        if a.prefix:
+            wl0, asns0 = load_watch(a.whitelist, a.asns); mon.set_watch({p: wl0.get(p, []) for p in a.prefix}, asns0)
+        if not (a.baseline_source == "history" and history_baseline(a, mon)):
+            mon.load_baseline(a.baseline)
     try:
         replay(mon, a.file) if a.mode == "demo" else asyncio.run(live(mon, a))
     except KeyboardInterrupt:
         print("\nstopped.")
     finally:
-        if a.mode == "live":
+        if a.mode == "live" and a.scope != "all":            # never overwrite baseline.json with the empty baseline of --scope all
             mon.save_baseline(a.baseline)
 
 
