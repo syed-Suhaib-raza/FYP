@@ -1,0 +1,201 @@
+seq,timestamp,prefix,origin,scenario,category,difficulty,in_scope,truth,truth_type,pred,pred_type,rule_pred,b2_pred,model_label,suppressed,triggered,detector_ms,model_ms,llm_ms,decision_ms,network_ms,queue_ms,e2e_ms,raw_output
+0,1762000192,140.82.112.0/24,36459,B085,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0303,,,0.0304,,,,
+1,1762000229,104.16.0.0/22,13335,B019,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0127,,,0.0129,,,,
+2,1762000344,45.223.10.0/23,207656,H142,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.019,0.421,0.0,0.44,,,,prefix hijack
+3,1762000471,66.167.90.0/24,3257,B050,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0127,,,0.0128,,,,
+4,1762000515,8.8.8.0/24,47065,H136,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0148,0.5223,0.0,0.5372,,,,prefix hijack
+5,1762000614,104.16.0.0/23,13335,B058,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0137,,,0.0138,,,,
+6,1762000622,45.223.8.0/22,9541,B044,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.01,,,0.01,,,,
+7,1762000681,66.167.90.128/25,3257,B061,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0111,,,0.0112,,,,
+8,1762000770,104.16.0.0/22,263702,H132,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0142,0.468,0.0,0.4823,,,,prefix hijack
+9,1762000789,45.223.8.0/22,9541,B030,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0117,,,0.0118,,,,
+10,1762000801,45.223.10.0/23,207656,H142,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,True,False,0.0091,,,0.0092,,,,prefix hijack
+11,1762000878,104.16.0.0/23,23002,L106,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0127,0.3615,0.0,0.3742,,,,prefix hijack
+12,1762000887,45.223.8.0/22,135520,L096,legit_customer_exact,easy,True,benign,none,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0145,0.3359,0.0,0.3504,,,,prefix hijack
+13,1762000938,1.1.1.0/24,13335,B042,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0098,,,0.0099,,,,
+14,1762001122,1.1.1.0/24,13335,X176,forged_origin_path_hijack,hard,False,anomalous,path_hijack,benign,none,benign,benign,,False,False,0.0077,,,0.0078,,,,
+15,1762001131,140.82.112.0/24,36459,B070,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.008,,,0.0081,,,,
+16,1762001138,8.8.8.0/24,15169,B029,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0077,,,0.0078,,,,
+17,1762001291,66.167.90.128/25,31500,L119,legit_customer_of_customer_more_specific,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0114,0.3458,0.0,0.3572,,,,prefix hijack
+18,1762001467,104.16.2.0/24,45090,H141,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0127,0.3461,0.0,0.3588,,,,prefix hijack
+19,1762001503,8.8.8.0/24,36040,L114,legit_sibling_exact,easy,True,benign,none,benign,none,anomalous,benign,none,False,True,0.0142,0.3923,0.0,0.4065,,,,none
+20,1762001550,1.1.1.0/25,23001,L109,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.012,0.3273,0.0,0.3394,,,,prefix hijack
+21,1762001579,66.167.90.0/24,3257,B039,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0103,,,0.0104,,,,
+22,1762001584,66.167.90.0/24,1299,H160,hijack_by_related_as,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0112,0.3235,0.0,0.3346,,,,prefix hijack
+23,1762001623,66.167.90.0/24,1299,H160,hijack_repeat_in_cooldown,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,True,False,0.0111,,,0.0112,,,,prefix hijack
+24,1762001663,8.8.8.128/25,199524,H150,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0114,0.3424,0.0,0.3538,,,,prefix hijack
+25,1762001688,45.223.8.0/22,9541,X181,route_leak_valid_origin,hard,False,anomalous,route_leak,benign,none,benign,benign,,False,False,0.0095,,,0.0096,,,,
+26,1762001728,104.16.1.0/24,174,H161,hijack_by_related_as,hard,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0121,0.3173,0.0,0.3294,,,,prefix hijack
+27,1762001770,1.1.1.0/24,,B091,as_set_origin,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0004,,,0.0005,,,,
+28,1762001895,45.223.8.0/22,58224,H130,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0118,0.3107,0.0,0.3225,,,,prefix hijack
+29,1762001956,104.16.0.0/22,209242,B045,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.011,,,0.011,,,,
+30,1762002001,45.223.8.0/22,136907,H126,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0112,0.608,0.0,0.6193,,,,prefix hijack
+31,1762002010,45.223.8.0/22,9541,B049,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0183,,,0.0185,,,,
+32,1762002028,8.8.8.128/25,199524,H150,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,True,False,0.011,,,0.0111,,,,prefix hijack
+33,1762002090,202.59.80.0/24,9541,B076,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0089,,,0.009,,,,
+34,1762002109,1.1.1.0/24,13335,X178,forged_origin_path_hijack,hard,False,anomalous,path_hijack,benign,none,benign,benign,,False,False,0.0078,,,0.0079,,,,
+35,1762002113,8.8.8.0/24,15169,B010,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0074,,,0.0075,,,,
+36,1762002182,8.8.8.0/24,,B094,as_set_origin,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0003,,,0.0004,,,,
+37,1762002195,66.167.90.0/25,3257,B062,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0085,,,0.0085,,,,
+38,1762002209,104.16.0.0/22,13335,B022,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0081,,,0.0082,,,,
+39,1762002236,45.223.8.0/22,136907,H126,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,True,False,0.0082,,,0.0083,,,,prefix hijack
+40,1762002239,66.167.90.128/25,31042,L102,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0127,0.3651,0.0,0.3778,,,,prefix hijack
+41,1762002271,66.167.90.128/25,3257,B053,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0104,,,0.0105,,,,
+42,1762002280,66.167.90.0/25,31042,L105,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0115,0.3395,0.0,0.3509,,,,prefix hijack
+43,1762002325,66.167.90.128/25,31042,L102,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0096,,,0.0096,,,,prefix hijack
+44,1762002350,1.0.0.0/24,13335,B078,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0062,,,0.0063,,,,
+45,1762002490,45.223.9.0/24,136525,L103,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0102,0.3336,0.0,0.3438,,,,prefix hijack
+46,1762002508,45.223.8.0/24,32787,L122,ddos_scrubbing_diversion,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0117,0.3116,0.0,0.3234,,,,prefix hijack
+47,1762002510,45.223.10.0/23,32787,L124,ddos_scrubbing_diversion,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0111,0.295,0.0,0.3061,,,,prefix hijack
+48,1762002513,45.223.9.0/24,136525,L103,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0099,,,0.01,,,,prefix hijack
+49,1762002516,66.167.90.0/25,31042,L105,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0135,,,0.0136,,,,prefix hijack
+50,1762002521,8.8.8.0/24,15169,B028,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0082,,,0.0083,,,,
+51,1762002535,66.167.90.0/24,3257,B021,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0083,,,0.0084,,,,
+52,1762002577,104.16.0.0/23,51088,H158,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0115,0.3358,0.0,0.3473,,,,prefix hijack
+53,1762002608,45.223.8.0/22,9541,X180,route_leak_valid_origin,hard,False,anomalous,route_leak,benign,none,benign,benign,,False,False,0.0092,,,0.0093,,,,
+54,1762002644,66.167.90.0/24,3257,B041,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0081,,,0.0082,,,,
+55,1762002685,8.8.8.0/25,15169,B064,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.008,,,0.0081,,,,
+56,1762002745,45.223.8.0/22,9009,H134,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0097,0.3259,0.0,0.3357,,,,prefix hijack
+57,1762002786,45.223.8.0/22,58224,H127,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0112,0.3083,0.0,0.3196,,,,prefix hijack
+58,1762002798,119.160.96.0/24,24499,B090,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0088,,,0.0089,,,,
+59,1762002820,8.8.8.0/25,26911,L115,legit_customer_of_customer_more_specific,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0105,0.3417,0.0,0.3523,,,,prefix hijack
+60,1762002924,45.223.8.0/22,328608,H137,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0157,0.3471,0.0,0.3628,,,,prefix hijack
+61,1762002968,66.167.90.0/24,31042,L099,legit_customer_exact,easy,True,benign,none,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0142,0.342,0.0,0.3562,,,,prefix hijack
+62,1762003074,39.32.0.0/24,45595,B088,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0095,,,0.0096,,,,
+63,1762003078,66.167.90.128/25,3257,B057,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.008,,,0.0081,,,,
+64,1762003115,104.16.0.0/22,13335,X174,forged_origin_path_hijack,hard,False,anomalous,path_hijack,benign,none,benign,benign,,False,False,0.008,,,0.008,,,,
+65,1762003256,104.16.0.0/22,23002,L095,legit_customer_exact,easy,True,benign,none,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0112,0.341,0.0,0.3522,,,,prefix hijack
+66,1762003267,8.8.8.0/24,36040,L111,legit_sibling_exact,easy,True,benign,none,benign,none,anomalous,benign,none,False,True,0.0122,0.3239,0.0,0.336,,,,none
+67,1762003427,8.8.8.0/24,36040,L113,legit_sibling_exact,easy,True,benign,none,benign,none,anomalous,benign,none,True,False,0.0102,,,0.0103,,,,none
+68,1762003487,119.160.96.0/24,24499,B075,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0082,,,0.0083,,,,
+69,1762003511,1.1.1.0/24,13335,B035,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.007,,,0.0071,,,,
+70,1762003513,45.223.8.0/22,9541,B038,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0072,,,0.0073,,,,
+71,1762003583,45.223.8.0/22,9541,B031,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0072,,,0.0072,,,,
+72,1762003703,157.240.1.0/24,32934,B071,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0071,,,0.0072,,,,
+73,1762003739,8.8.8.128/25,15169,B052,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0068,,,0.0069,,,,
+74,1762003973,45.223.8.0/24,32787,L125,ddos_scrubbing_diversion,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0107,0.331,0.0,0.3417,,,,prefix hijack
+75,1762004060,8.8.8.0/24,15169,B020,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0088,,,0.0088,,,,
+76,1762004110,66.167.90.128/25,58224,H148,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0111,0.3193,0.0,0.3305,,,,prefix hijack
+77,1762004177,45.223.8.0/23,32787,L123,ddos_scrubbing_diversion,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0121,0.3368,0.0,0.3489,,,,prefix hijack
+78,1762004240,45.223.8.0/22,9541,B017,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0088,,,0.0088,,,,
+79,1762004261,8.8.8.0/24,15169,B015,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0072,,,0.0072,,,,
+80,1762004375,31.13.64.0/24,32934,B083,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0066,,,0.0067,,,,
+81,1762004401,157.240.1.0/24,32934,B086,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0073,,,0.0073,,,,
+82,1762004536,151.101.0.0/24,54113,B087,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.007,,,0.0071,,,,
+83,1762004700,1.1.1.0/24,136907,H133,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0099,0.3488,0.0,0.3587,,,,prefix hijack
+84,1762004706,1.1.1.0/24,13335,B003,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.009,,,0.0091,,,,
+85,1762004744,66.167.90.0/24,3257,B047,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0085,,,0.0085,,,,
+86,1762004762,45.223.8.0/22,9541,B023,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0075,,,0.0075,,,,
+87,1762004862,1.1.1.128/25,23101,L120,legit_customer_of_customer_more_specific,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0099,0.3185,0.0,0.3284,,,,prefix hijack
+88,1762004925,45.223.8.0/24,135520,L107,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0116,0.3083,0.0,0.32,,,,prefix hijack
+89,1762004943,1.1.1.0/24,136907,H133,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,True,False,0.0087,,,0.0088,,,,prefix hijack
+90,1762004958,66.167.90.0/25,3257,B065,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0083,,,0.0083,,,,
+91,1762004962,45.223.10.0/24,9009,H151,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0097,0.3145,0.0,0.3242,,,,prefix hijack
+92,1762005013,45.223.8.0/22,9541,B024,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0101,,,0.0102,,,,
+93,1762005038,8.8.8.0/24,6939,H166,hijack_by_related_as,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.01,0.5872,0.0,0.5972,,,,prefix hijack
+94,1762005091,45.223.8.0/22,3491,H168,hijack_by_related_as,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0121,0.2991,0.0,0.3112,,,,prefix hijack
+95,1762005201,45.223.10.0/23,9541,B054,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0087,,,0.0087,,,,
+96,1762005213,45.223.11.0/24,64512,H171,private_asn_origin,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.01,0.3131,0.0,0.3231,,,,prefix hijack
+97,1762005234,1.1.1.0/24,13335,B001,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.009,,,0.0091,,,,
+98,1762005282,8.8.8.0/24,328608,H140,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0098,0.3159,0.0,0.3257,,,,prefix hijack
+99,1762005287,151.101.0.0/24,54113,B072,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0089,,,0.0089,,,,
+100,1762005316,104.16.1.0/24,23002,L108,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0109,1.5143,0.0,1.5251,,,,prefix hijack
+101,1762005345,102.67.200.0/24,37662,B066,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0097,,,0.0099,,,,
+102,1762005406,58.65.128.0/24,38547,B089,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0073,,,0.0074,,,,
+103,1762005477,45.223.8.0/22,3491,H168,hijack_repeat_in_cooldown,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,True,False,0.0078,,,0.0079,,,,prefix hijack
+104,1762005630,66.167.90.128/25,3257,B056,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0075,,,0.0076,,,,
+105,1762005704,104.16.1.0/24,23002,L108,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0075,,,0.0075,,,,prefix hijack
+106,1762005736,58.65.128.0/24,38547,B074,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0066,,,0.0066,,,,
+107,1762005802,45.223.10.0/24,138000,L117,legit_customer_of_customer_more_specific,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0096,0.338,0.0,0.3476,,,,prefix hijack
+108,1762005836,104.16.2.0/23,45090,H157,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.012,0.4302,0.0,0.4423,,,,prefix hijack
+109,1762005837,66.167.90.0/24,3257,B046,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.009,,,0.009,,,,
+110,1762005876,23.235.32.0/24,54113,B069,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.007,,,0.0071,,,,
+111,1762005881,8.8.8.0/25,26911,L118,legit_customer_of_customer_more_specific,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0103,0.3406,0.0,0.3509,,,,prefix hijack
+112,1762006131,66.167.90.0/24,140224,H129,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.013,0.3524,0.0,0.3654,,,,prefix hijack
+113,1762006160,8.8.8.0/24,15169,B025,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.009,,,0.009,,,,
+114,1762006166,66.167.90.0/24,140224,H129,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,True,False,0.0081,,,0.0082,,,,prefix hijack
+115,1762006508,8.8.8.0/24,15169,B004,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0074,,,0.0075,,,,
+116,1762006550,66.167.90.0/24,263702,H138,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0099,0.3333,0.0,0.3431,,,,prefix hijack
+117,1762006568,104.16.0.0/22,47065,H128,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0123,0.331,0.0,0.3433,,,,prefix hijack
+118,1762006678,1.1.1.0/24,174,H164,hijack_by_related_as,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0116,0.4947,0.0,0.5063,,,,prefix hijack
+119,1762006684,66.167.90.0/24,3257,B036,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.01,,,0.0102,,,,
+120,1762006897,8.8.8.128/25,15169,B051,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0078,,,0.0079,,,,
+121,1762006902,1.1.1.0/25,9009,H156,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0103,0.3637,0.0,0.374,,,,prefix hijack
+122,1762006917,104.16.0.0/22,13335,B007,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0103,,,0.0104,,,,
+123,1762006924,104.16.0.0/23,209242,B063,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0085,,,0.0086,,,,
+124,1762006931,1.1.1.0/24,174,H163,hijack_by_related_as,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,True,False,0.0082,,,0.0083,,,,prefix hijack
+125,1762006956,45.223.8.0/22,3491,H165,hijack_by_related_as,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0109,0.3295,0.0,0.3404,,,,prefix hijack
+126,1762006969,66.167.90.0/24,3257,B032,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.009,,,0.0091,,,,
+127,1762006970,1.1.1.0/24,13335,B008,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0071,,,0.0072,,,,
+128,1762007035,45.223.8.0/22,9541,B011,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0072,,,0.0073,,,,
+129,1762007054,66.167.90.0/24,64512,H172,private_asn_origin,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0103,0.3298,0.0,0.3401,,,,prefix hijack
+130,1762007130,1.1.1.0/24,174,H163,hijack_repeat_in_cooldown,hard,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,benign,prefix hijack,True,False,0.0095,,,0.0096,,,,prefix hijack
+131,1762007226,104.16.0.0/22,13335,X177,forged_origin_path_hijack,hard,False,anomalous,path_hijack,benign,none,benign,benign,,False,False,0.0084,,,0.0085,,,,
+132,1762007264,66.167.90.128/25,174,H162,hijack_by_related_as,hard,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0105,0.321,0.0,0.3315,,,,prefix hijack
+133,1762007271,66.167.90.128/25,140224,H147,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0121,0.3303,0.0,0.3424,,,,prefix hijack
+134,1762007281,110.93.192.0/24,17557,B077,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0089,,,0.009,,,,
+135,1762007284,104.16.0.0/22,13335,B034,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0081,,,0.0082,,,,
+136,1762007375,66.167.90.0/24,3257,B027,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0077,,,0.0078,,,,
+137,1762007412,45.223.11.0/24,32787,L121,ddos_scrubbing_diversion,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0114,0.3448,0.0,0.3562,,,,prefix hijack
+138,1762007506,8.8.8.0/25,136907,H144,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0115,0.3375,0.0,0.349,,,,prefix hijack
+139,1762007555,66.167.90.128/25,140224,H147,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,True,False,0.0091,,,0.0092,,,,prefix hijack
+140,1762007569,45.223.8.0/22,9541,X179,route_leak_valid_origin,hard,False,anomalous,route_leak,benign,none,benign,benign,,False,False,0.0076,,,0.0077,,,,
+141,1762007585,39.32.0.0/24,45595,B073,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0066,,,0.0067,,,,
+142,1762007599,45.223.8.0/23,135520,L101,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0095,0.3295,0.0,0.3391,,,,prefix hijack
+143,1762007600,66.167.90.0/24,3257,B033,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.01,,,0.0101,,,,
+144,1762007690,104.16.0.0/22,209242,B012,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0081,,,0.0082,,,,
+145,1762007713,1.1.1.0/24,,B092,as_set_origin,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0003,,,0.0005,,,,
+146,1762007833,45.223.10.0/23,140224,H145,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0102,0.3357,0.0,0.3459,,,,prefix hijack
+147,1762007846,45.223.8.0/22,9541,B013,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0089,,,0.009,,,,
+148,1762007861,66.167.90.0/24,64512,H173,private_asn_origin,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0108,0.3423,0.0,0.3531,,,,prefix hijack
+149,1762007880,45.223.8.0/23,135520,L101,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0093,,,0.0094,,,,prefix hijack
+150,1762008000,8.8.8.0/24,,B093,as_set_origin,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0003,,,0.0004,,,,
+151,1762008104,102.67.200.0/24,37662,B081,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0074,,,0.0075,,,,
+152,1762008171,31.13.64.0/24,32934,B068,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0068,,,0.0069,,,,
+153,1762008245,1.1.1.0/25,23001,L110,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0097,0.3228,0.0,0.3325,,,,prefix hijack
+154,1762008248,45.223.10.0/23,140224,H145,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,True,False,0.0089,,,0.009,,,,prefix hijack
+155,1762008333,8.8.8.128/25,15169,B055,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0071,,,0.0072,,,,
+156,1762008334,8.8.8.0/25,263702,H152,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0115,0.3311,0.0,0.3425,,,,prefix hijack
+157,1762008370,45.223.11.0/24,263702,H155,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.011,0.3313,0.0,0.3423,,,,prefix hijack
+158,1762008414,104.16.0.0/22,13335,B005,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0093,,,0.0095,,,,
+159,1762008445,104.16.0.0/22,207656,H131,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0108,0.3482,0.0,0.359,,,,prefix hijack
+160,1762008473,8.8.8.0/25,64512,H170,private_asn_origin,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0127,0.3533,0.0,0.366,,,,prefix hijack
+161,1762008559,45.223.8.0/22,135520,L098,legit_customer_exact,easy,True,benign,none,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0122,0.3444,0.0,0.3566,,,,prefix hijack
+162,1762008562,1.1.1.0/25,23001,L110,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0101,,,0.0102,,,,prefix hijack
+163,1762008650,66.167.90.0/24,31042,L100,legit_customer_exact,easy,True,benign,none,anomalous,unexpected_origin,anomalous,benign,prefix hijack,False,True,0.0116,0.3329,0.0,0.3445,,,,prefix hijack
+164,1762008720,45.223.8.0/22,135520,L097,legit_customer_exact,easy,True,benign,none,anomalous,unexpected_origin,anomalous,benign,prefix hijack,True,False,0.1057,,,0.1058,,,,prefix hijack
+165,1762008779,1.1.1.0/24,209242,L112,legit_sibling_exact,easy,True,benign,none,benign,none,anomalous,benign,none,False,True,0.0106,0.3421,0.0,0.3527,,,,none
+166,1762008820,45.223.8.0/22,9541,B037,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0088,,,0.0089,,,,
+167,1762008874,1.1.1.0/24,211398,H135,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.0102,0.3585,0.0,0.3686,,,,prefix hijack
+168,1762008882,1.1.1.0/24,13335,B048,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0096,,,0.0097,,,,
+169,1762008977,45.223.9.0/24,47065,H149,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0103,0.6063,0.0,0.6166,,,,prefix hijack
+170,1762009006,45.223.16.0/24,47065,B080,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0085,,,0.0086,,,,
+171,1762009139,104.16.0.0/22,13335,B016,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0084,,,0.0085,,,,
+172,1762009240,104.16.0.0/22,209242,B009,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0077,,,0.0078,,,,
+173,1762009280,45.223.8.0/23,328608,H143,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0102,0.3382,0.0,0.3484,,,,prefix hijack
+174,1762009287,8.8.8.0/24,9009,H139,exact_hijack_unrelated,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,False,True,0.012,0.6527,0.0,0.6647,,,,prefix hijack
+175,1762009380,104.16.0.0/22,209242,B002,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0093,,,0.0095,,,,
+176,1762009410,8.8.4.0/24,15169,B079,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0069,,,0.007,,,,
+177,1762009445,45.223.8.0/22,9541,B043,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0072,,,0.0072,,,,
+178,1762009485,23.235.32.0/24,54113,B084,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0065,,,0.0066,,,,
+179,1762009510,104.16.0.0/24,328608,H153,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0102,0.3485,0.0,0.3587,,,,prefix hijack
+180,1762009541,8.8.8.128/25,15169,B059,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0092,,,0.0093,,,,
+181,1762009547,104.16.0.0/24,328608,H153,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,True,False,0.0084,,,0.0085,,,,prefix hijack
+182,1762009691,8.8.8.0/24,9009,H139,hijack_repeat_in_cooldown,easy,True,anomalous,unexpected_origin,anomalous,unexpected_origin,anomalous,anomalous,prefix hijack,True,False,0.0075,,,0.0075,,,,prefix hijack
+183,1762009775,1.1.1.128/25,9009,H154,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0094,0.3422,0.0,0.3516,,,,prefix hijack
+184,1762009854,104.16.2.0/23,1299,H159,hijack_by_related_as,hard,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0112,0.3343,0.0,0.3456,,,,prefix hijack
+185,1762009969,104.16.0.0/24,263702,H146,subprefix_hijack_unrelated,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.012,0.3335,0.0,0.3455,,,,prefix hijack
+186,1762009987,66.167.90.0/25,65530,H169,private_asn_origin,easy,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0115,0.3308,0.0,0.3423,,,,prefix hijack
+187,1762010108,41.188.128.0/24,36974,B067,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0082,,,0.0083,,,,
+188,1762010383,1.1.1.128/25,174,H167,hijack_by_related_as,hard,True,anomalous,unexpected_deaggregation,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0101,0.3635,0.0,0.3736,,,,prefix hijack
+189,1762010478,66.167.90.0/24,3257,X175,forged_origin_path_hijack,hard,False,anomalous,path_hijack,benign,none,benign,benign,,False,False,0.0089,,,0.0089,,,,
+190,1762010552,45.223.10.0/24,9541,B060,expected_origin_more_specific,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0073,,,0.0073,,,,
+191,1762010564,8.8.8.0/24,15169,B006,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0072,,,0.0073,,,,
+192,1762010583,8.8.8.0/24,15169,B040,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.007,,,0.007,,,,
+193,1762010588,66.167.90.0/24,3257,B026,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0075,,,0.0075,,,,
+194,1762010619,45.223.8.0/23,138000,L116,legit_customer_of_customer_more_specific,hard,True,benign,none,anomalous,unexpected_deaggregation,anomalous,anomalous,prefix hijack,False,True,0.0102,0.357,0.0,0.3673,,,,prefix hijack
+195,1762010620,41.188.128.0/24,36974,B082,unwatched_prefix,easy,True,benign,none,benign,none,benign,benign,,False,False,0.008,,,0.0081,,,,
+196,1762010625,1.1.1.0/24,13335,B018,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.007,,,0.007,,,,
+197,1762010742,8.8.8.0/24,15169,B014,expected_origin_exact,easy,True,benign,none,benign,none,benign,benign,,False,False,0.0069,,,0.007,,,,
+198,1762010763,8.8.8.0/25,26910,L104,legit_customer_more_specific,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,False,True,0.0095,0.3214,0.0,0.3309,,,,prefix hijack
+199,1762011086,8.8.8.0/25,26910,L104,legit_customer_repeat_in_cooldown,easy,True,benign,none,anomalous,unexpected_deaggregation,anomalous,benign,prefix hijack,True,False,0.0087,,,0.0088,,,,prefix hijack

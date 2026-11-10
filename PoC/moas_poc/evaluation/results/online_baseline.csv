@@ -1,0 +1,203 @@
+seq,timestamp,prefix,origin,scenario,category,difficulty,in_scope,truth,pred,score,triggered,event_id,revision,catalog_ms,ai_ms,decision_ms,network_ms,queue_ms,e2e_ms,reason
+0,1762000000,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.1045,,0.108,3015.0478,1.3592,3016.515,no active multi-origin conflict
+1,1762000090,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.1022,,0.1049,3164.9151,0.9649,3165.9849,no active multi-origin conflict
+2,1762000180,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.0371,,0.0377,3284.2932,0.5498,3284.8806,no active multi-origin conflict
+3,1762000270,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.0575,,0.0595,3423.4078,0.819,3424.2863,no active multi-origin conflict
+4,1762000300,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0636,,0.0653,3132.3349,0.9789,3133.3792,no active multi-origin conflict
+5,1762000360,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.0566,,0.0581,4136.8279,0.8361,4137.7222,no active multi-origin conflict
+6,1762000400,77.77.77.0/24,3320,B05,provider_aggregation,easy,True,benign,benign,,False,,,0.0482,,0.05,4286.684,0.927,4287.661,no active multi-origin conflict
+7,1762000410,77.77.77.0/24,6830,B05,provider_aggregation,easy,True,benign,benign,0.25,True,1,1,1.0403,2.3693,3.4097,4237.9942,0.4838,4241.8876,origin AS3320 / AS6830 are in an upstream relation (often benign)
+8,1762000420,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0711,,0.0732,4605.5658,1.0061,4606.6451,no active multi-origin conflict
+9,1762000420,77.77.77.0/24,6830,B05,provider_aggregation,easy,True,benign,benign,0.25,False,1,1,0.0615,,0.0623,4268.934,0.7489,4269.7452,origin AS3320 / AS6830 are in an upstream relation (often benign)
+10,1762000435,77.77.77.0/24,6830,B05,provider_aggregation,easy,True,benign,benign,0.25,False,1,1,0.0825,,0.0845,4625.3932,0.9708,4626.4485,origin AS3320 / AS6830 are in an upstream relation (often benign)
+11,1762000450,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.051,,0.0519,3919.7259,0.8593,3920.6371,no active multi-origin conflict
+12,1762000470,77.77.77.0/24,6830,B05,provider_aggregation,easy,True,benign,benign,0.25,False,1,1,0.0373,,0.0382,4570.4682,0.577,4571.0833,origin AS3320 / AS6830 are in an upstream relation (often benign)
+13,1762000520,77.77.77.0/24,6830,B05,provider_aggregation,easy,True,benign,benign,0.25,False,1,1,0.0734,,0.0752,5375.1509,1.0509,5376.2771,origin AS3320 / AS6830 are in an upstream relation (often benign)
+14,1762000540,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.073,,0.0744,5515.5151,0.9179,5516.5074,no active multi-origin conflict
+15,1762000540,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0535,,0.0544,4526.3681,0.8218,4527.2443,no active multi-origin conflict
+16,1762000600,104.16.0.0/24,13335,A10,planned_multi_origin,easy,True,benign,benign,,False,,,0.0674,,0.0696,5595.3841,1.0197,5596.4734,no active multi-origin conflict
+17,1762000630,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.0452,,0.046,5578.455,0.5641,5579.0651,no active multi-origin conflict
+18,1762000660,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0701,,0.0725,6277.9179,1.0118,6279.0022,no active multi-origin conflict
+19,1762000700,104.16.0.0/24,209242,A10,planned_multi_origin,easy,True,benign,benign,0.1,True,2,1,1.1757,0.9315,2.1072,6343.2,0.937,6346.2442,all origins are authorised for this watched prefix (planned multi-origin)
+20,1762000720,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.0296,,0.0303,5439.796,0.4399,5440.2662,no active multi-origin conflict
+21,1762000780,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0451,,0.046,6496.768,0.6711,6497.4851,no active multi-origin conflict
+22,1762000800,104.16.0.0/24,13335,A10,planned_multi_origin,easy,True,benign,benign,0.1,False,2,1,0.0475,,0.0488,6256.2001,0.643,6256.8919,all origins are authorised for this watched prefix (planned multi-origin)
+23,1762000810,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.059,,0.0599,6337.2838,0.8099,6338.1537,no active multi-origin conflict
+24,1762000900,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0668,,0.0691,8653.5599,1.025,8654.654,no active multi-origin conflict
+25,1762000900,66.167.90.0/24,3257,A03,steady_single_origin,easy,True,benign,benign,,False,,,0.0658,,0.0682,7027.2331,1.0428,7028.3442,no active multi-origin conflict
+26,1762000900,104.16.0.0/24,209242,A10,planned_multi_origin,easy,True,benign,benign,0.1,False,2,1,0.0721,,0.0745,7856.051,1.0061,7857.1316,all origins are authorised for this watched prefix (planned multi-origin)
+27,1762000940,66.167.90.0/24,3257,A03,steady_single_origin,easy,True,benign,benign,,False,,,0.0671,,0.0695,8150.151,1.02,8151.2404,no active multi-origin conflict
+28,1762000980,66.167.90.0/24,3257,A03,steady_single_origin,easy,True,benign,benign,,False,,,0.0658,,0.0673,8795.707,0.9229,8796.6972,no active multi-origin conflict
+29,1762001000,1.1.1.0/24,47065,A01,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,True,3,1,0.784,3.2327,4.0167,8854.655,0.8981,8859.5698,origin(s) AS47065 not authorised for this watched prefix
+30,1762001000,104.16.0.0/24,13335,A10,planned_multi_origin,easy,True,benign,benign,0.1,False,2,1,0.062,,0.063,8929.374,0.8261,8930.2631,all origins are authorised for this watched prefix (planned multi-origin)
+31,1762001000,91.198.174.0/24,43821,B12,origin_change_no_overlap,easy,True,benign,benign,,False,,,0.0511,,0.052,9007.592,0.7491,9008.3931,no active multi-origin conflict
+32,1762001004,1.1.1.0/24,47065,A01,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,3,1,0.0751,,0.077,9664.9311,1.054,9666.0621,origin(s) AS47065 not authorised for this watched prefix
+33,1762001011,1.1.1.0/24,47065,A01,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,3,1,0.0601,,0.0616,9991.8201,1.0419,9992.9236,origin(s) AS47065 not authorised for this watched prefix
+34,1762001020,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0642,,0.0663,10391.4018,1.0812,10392.5492,no active multi-origin conflict
+35,1762001030,1.1.1.0/24,47065,A01,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,3,1,0.0661,,0.0674,10091.5458,0.9911,10092.6043,origin(s) AS47065 not authorised for this watched prefix
+36,1762001047,1.1.1.0/24,47065,A01,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,3,1,0.0651,,0.066,10407.1102,0.8488,10408.025,origin(s) AS47065 not authorised for this watched prefix
+37,1762001060,1.1.1.0/24,47065,A01,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,3,1,0.073,,0.0751,10979.3639,1.0071,10980.4461,origin(s) AS47065 not authorised for this watched prefix
+38,1762001060,91.198.174.0/24,43821,B12,origin_change_no_overlap,easy,True,benign,benign,,False,,,0.0467,,0.0479,9070.255,0.6359,9070.9388,no active multi-origin conflict
+39,1762001100,1.1.1.0/24,13335,A01,legit_origin_during_hijack,easy,True,anomalous,anomalous,0.8,False,3,1,0.0271,,0.0278,10993.227,0.4277,10993.6826,origin(s) AS47065 not authorised for this watched prefix
+40,1762001100,66.167.90.0/24,4637,A03,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,True,4,1,0.6979,0.7786,1.4765,10493.2458,0.9902,10495.7125,origin(s) AS4637 not authorised for this watched prefix
+41,1762001100,104.16.0.0/24,209242,A10,planned_multi_origin,easy,True,benign,benign,0.1,False,2,1,0.0742,,0.0762,10693.5163,0.9799,10694.5723,all origins are authorised for this watched prefix (planned multi-origin)
+42,1762001105,66.167.90.0/24,4637,A03,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,4,1,0.0414,,0.0426,10898.592,0.6011,10899.2356,origin(s) AS4637 not authorised for this watched prefix
+43,1762001140,8.8.8.0/24,15169,A02,steady_single_origin,easy,True,benign,benign,,False,,,0.0576,,0.0585,11220.032,0.8359,11220.9264,no active multi-origin conflict
+44,1762001160,66.167.90.0/24,4637,A03,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,4,1,0.0473,,0.0485,12043.4737,0.6492,12044.1714,origin(s) AS4637 not authorised for this watched prefix
+45,1762001200,1.1.1.0/25,47065,A09,subprefix_hijack,hard,False,anomalous,benign,,False,,,0.0689,,0.0711,11382.0071,1.0509,11383.1292,no active multi-origin conflict
+46,1762001200,104.16.0.0/24,13335,A10,planned_multi_origin,easy,True,benign,benign,0.1,False,2,1,0.0706,,0.0729,10943.8121,1.025,10944.91,all origins are authorised for this watched prefix (planned multi-origin)
+47,1762001209,1.1.1.0/25,47065,A09,subprefix_hijack,hard,False,anomalous,benign,,False,,,0.0744,,0.0767,11583.1981,0.9711,11584.2459,no active multi-origin conflict
+48,1762001230,1.1.1.0/25,47065,A09,subprefix_hijack,hard,False,anomalous,benign,,False,,,0.0602,,0.0626,11666.2588,1.044,11667.3655,no active multi-origin conflict
+49,1762001275,1.1.1.0/25,47065,A09,subprefix_hijack,hard,False,anomalous,benign,,False,,,0.0438,,0.0446,11670.5461,0.6487,11671.2394,no active multi-origin conflict
+50,1762001300,104.16.0.0/24,209242,A10,planned_multi_origin,easy,True,benign,benign,0.1,False,2,1,0.0663,,0.0674,12618.777,0.9217,12619.7662,all origins are authorised for this watched prefix (planned multi-origin)
+51,1762001500,199.83.128.0/24,19551,B10,anycast_unwatched,hard,True,benign,benign,,False,,,0.0403,,0.0411,11393.188,0.6101,11393.8392,no active multi-origin conflict
+52,1762001520,199.83.128.0/24,62571,B10,anycast_unwatched,hard,True,benign,uncertain,0.4,True,5,1,0.4733,0.512,0.9852,11529.0859,0.5481,11530.6192,no distinguishing evidence either way
+53,1762001545,199.83.128.0/24,19551,B10,anycast_unwatched,hard,True,benign,uncertain,0.4,False,5,1,0.0741,,0.0765,11723.403,0.9949,11724.4744,no distinguishing evidence either way
+54,1762001590,199.83.128.0/24,62571,B10,anycast_unwatched,hard,True,benign,uncertain,0.4,False,5,1,0.065,,0.0668,11992.2857,0.9491,11993.3017,no distinguishing evidence either way
+55,1762001640,199.83.128.0/24,19551,B10,anycast_unwatched,hard,True,benign,uncertain,0.4,False,5,1,0.0747,,0.0768,12067.4839,0.9999,12068.5607,no distinguishing evidence either way
+56,1762001700,199.83.128.0/24,62571,B10,anycast_unwatched,hard,True,benign,uncertain,0.4,False,5,1,0.0657,,0.0673,12268.9381,0.9489,12269.9543,no distinguishing evidence either way
+57,1762001800,8.8.8.0/24,64666,A02,exact_hijack_watched_private_asn,easy,True,anomalous,anomalous,1.0,True,6,1,0.6528,0.714,1.3668,11399.7889,0.437,11401.5927,origin(s) AS64666 not authorised for this watched prefix; special-purpose origin ASN: AS64666 (private)
+58,1762001800,66.167.15.0/24,3257,B08,planned_origin_migration,easy,True,benign,benign,,False,,,0.0534,,0.055,12292.9649,0.7889,12293.8088,no active multi-origin conflict
+59,1762001820,8.8.8.0/24,64666,A02,exact_hijack_watched_private_asn,easy,True,anomalous,anomalous,1.0,False,6,1,0.0135,,0.0137,12873.1279,0.2439,12873.3855,origin(s) AS64666 not authorised for this watched prefix; special-purpose origin ASN: AS64666 (private)
+60,1762001833,8.8.8.0/24,64666,A02,exact_hijack_watched_private_asn,easy,True,anomalous,anomalous,1.0,False,6,1,0.0634,,0.0657,13065.4891,0.9298,13066.4846,origin(s) AS64666 not authorised for this watched prefix; special-purpose origin ASN: AS64666 (private)
+61,1762001860,66.167.15.0/24,3257,B08,planned_origin_migration,easy,True,benign,benign,,False,,,0.0696,,0.0717,12310.4432,1.0419,12311.5567,no active multi-origin conflict
+62,1762001890,8.8.8.0/24,64666,A02,exact_hijack_watched_private_asn,easy,True,anomalous,anomalous,1.0,False,6,1,0.0454,,0.0462,13205.8141,0.5639,13206.4242,origin(s) AS64666 not authorised for this watched prefix; special-purpose origin ASN: AS64666 (private)
+63,1762001920,66.167.15.0/24,3257,B08,planned_origin_migration,easy,True,benign,benign,,False,,,0.0307,,0.0315,12227.123,0.4499,12227.6044,no active multi-origin conflict
+64,1762002000,102.130.48.0/24,37100,A04a,steady_single_origin,hard,True,benign,benign,,False,,,0.0397,,0.0407,13178.242,0.6831,13178.9657,no active multi-origin conflict
+65,1762002000,104.16.0.0/24,50673,A10,origin_added_to_planned_moas,easy,True,anomalous,anomalous,0.8,True,2,2,0.9696,0.8887,1.8583,12825.7937,0.524,12828.1761,origin(s) AS50673 not authorised for this watched prefix
+66,1762002010,104.16.0.0/24,50673,A10,origin_added_to_planned_moas,easy,True,anomalous,anomalous,0.8,False,2,2,0.0732,,0.0756,12909.9178,0.9391,12910.9325,origin(s) AS50673 not authorised for this watched prefix
+67,1762002055,102.130.48.0/24,37100,A04a,steady_single_origin,hard,True,benign,benign,,False,,,0.0644,,0.0664,13743.6242,0.948,13744.6385,no active multi-origin conflict
+68,1762002060,104.16.0.0/24,50673,A10,origin_added_to_planned_moas,easy,True,anomalous,anomalous,0.8,False,2,2,0.0559,,0.0568,12863.061,0.7401,12863.8578,origin(s) AS50673 not authorised for this watched prefix
+69,1762002100,104.16.0.0/24,13335,A10,legit_origin_during_hijack,easy,True,anomalous,anomalous,0.8,False,2,2,0.0815,,0.0837,13500.0651,0.9937,13501.1425,origin(s) AS50673 not authorised for this watched prefix
+70,1762002100,66.167.15.0/24,2828,B08,planned_origin_migration,easy,True,benign,benign,0.1,True,8,1,0.7632,0.8681,1.6314,14565.7971,0.8838,14568.3123,all origins are authorised for this watched prefix (planned multi-origin)
+71,1762002130,66.167.15.0/24,2828,B08,planned_origin_migration,easy,True,benign,benign,0.1,False,8,1,0.047,,0.048,14941.503,0.509,14942.06,all origins are authorised for this watched prefix (planned multi-origin)
+72,1762002183,202.59.80.0/24,9541,B0311,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0563,,0.0575,15104.9023,0.7727,15105.7324,no active multi-origin conflict
+73,1762002200,66.167.15.0/24,2828,B08,planned_origin_migration,easy,True,benign,benign,0.1,False,8,1,0.0728,,0.0751,15170.7139,0.922,15171.711,all origins are authorised for this watched prefix (planned multi-origin)
+74,1762002300,102.130.48.0/24,328608,A04a,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,True,7,1,0.853,0.9475,1.8005,14246.0089,0.9339,14248.7432,no distinguishing evidence either way
+75,1762002312,102.130.48.0/24,328608,A04a,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,7,1,0.0785,,0.0808,14612.2379,0.9961,14613.3149,no distinguishing evidence either way
+76,1762002340,102.130.48.0/24,328608,A04a,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,7,1,0.076,,0.0784,14799.5231,0.9379,14800.5394,no distinguishing evidence either way
+77,1762002350,185.60.216.0/24,32934,B0307,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0623,,0.0634,14625.6151,0.855,14626.5335,no active multi-origin conflict
+78,1762002395,102.130.48.0/24,328608,A04a,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,7,1,0.0767,,0.0786,15336.0269,0.9859,15337.0914,no distinguishing evidence either way
+79,1762002500,103.21.244.0/24,38001,A05a,steady_single_origin,easy,True,benign,benign,,False,,,0.0689,,0.0711,15387.5029,0.9711,15388.5451,no active multi-origin conflict
+80,1762002524,202.59.80.0/24,9541,B0311,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0569,,0.0586,16408.2868,0.9022,16409.2476,no active multi-origin conflict
+81,1762002529,151.101.0.0/24,54113,B0306,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0444,,0.0454,15399.7788,0.7162,15400.5404,no active multi-origin conflict
+82,1762002570,103.21.244.0/24,38001,A05a,steady_single_origin,easy,True,benign,benign,,False,,,0.0371,,0.0378,15381.103,0.457,15381.5979,no active multi-origin conflict
+83,1762002600,151.101.64.0/22,"{54113,30081}",B07,as_set_aggregate,easy,True,benign,benign,,False,,,0.0692,,0.0702,14798.347,0.7198,14799.1369,no active multi-origin conflict
+84,1762002615,185.60.216.0/24,32934,B0307,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0521,,0.053,14701.5619,0.7288,14702.3438,no active multi-origin conflict
+85,1762002650,151.101.64.0/22,"{54113,30081}",B07,as_set_aggregate,easy,True,benign,benign,,False,,,0.088,,0.0899,14834.6641,0.7439,14835.4978,no active multi-origin conflict
+86,1762002710,151.101.64.0/22,"{54113,30081}",B07,as_set_aggregate,easy,True,benign,benign,,False,,,0.073,,0.0744,15471.519,0.8461,15472.4395,no active multi-origin conflict
+87,1762002726,151.101.0.0/24,54113,B0306,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0398,,0.0405,16777.8461,0.4919,16778.3785,no active multi-origin conflict
+88,1762002814,185.60.216.0/24,32934,B0307,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.071,,0.0734,15927.012,0.947,15928.0323,no active multi-origin conflict
+89,1762002900,103.21.244.0/24,65010,A05a,private_asn_origin,easy,True,anomalous,anomalous,0.65,True,9,1,0.768,0.9042,1.6722,15374.5811,0.6189,15376.8722,special-purpose origin ASN: AS65010 (private); origin AS38001 / AS65010 are in an upstream relation (often benign)
+90,1762002900,151.101.64.0/22,"{54113,30081}",B07,as_set_aggregate,easy,True,benign,benign,,False,,,0.091,,0.0934,17070.6749,1.045,17071.8133,no active multi-origin conflict
+91,1762002920,103.21.244.0/24,65010,A05a,private_asn_origin,easy,True,anomalous,anomalous,0.65,False,9,1,0.0455,,0.0465,15903.944,0.495,15904.4855,special-purpose origin ASN: AS65010 (private); origin AS38001 / AS65010 are in an upstream relation (often benign)
+92,1762002970,103.21.244.0/24,65010,A05a,private_asn_origin,easy,True,anomalous,anomalous,0.65,False,9,1,0.0767,,0.0791,16100.0042,0.8898,16100.9731,special-purpose origin ASN: AS65010 (private); origin AS38001 / AS65010 are in an upstream relation (often benign)
+93,1762002981,202.59.80.0/24,9541,B0311,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0756,,0.0778,16446.7158,0.972,16447.7656,no active multi-origin conflict
+94,1762003074,119.160.96.0/24,24499,B0310,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0444,,0.0454,15846.9689,0.6649,15847.6792,no active multi-origin conflict
+95,1762003100,202.69.160.0/24,38547,A06,steady_single_origin,easy,True,benign,benign,,False,,,0.0436,,0.0446,15682.025,0.6402,15682.7097,no active multi-origin conflict
+96,1762003103,151.101.0.0/24,54113,B0306,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0429,,0.0441,17671.7439,0.6721,17672.4601,no active multi-origin conflict
+97,1762003109,41.188.128.0/24,36974,B0301,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0415,,0.0425,16750.0739,0.627,16750.7435,no active multi-origin conflict
+98,1762003190,202.69.160.0/24,38547,A06,steady_single_origin,easy,True,benign,benign,,False,,,0.0594,,0.0603,17438.7128,0.5791,17439.3522,no active multi-origin conflict
+99,1762003246,119.160.96.0/24,24499,B0310,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0676,,0.07,17203.105,1.039,17204.214,no active multi-origin conflict
+100,1762003300,185.40.4.0/24,6762,B06,provider_aggregation,easy,True,benign,benign,,False,,,0.051,,0.0525,17302.474,0.962,17303.4885,no active multi-origin conflict
+101,1762003310,185.40.4.0/24,202134,B06,provider_aggregation,easy,True,benign,benign,0.25,True,10,1,1.0129,0.8297,1.8426,17698.734,1.054,17701.6307,origin AS6762 / AS202134 are in an upstream relation (often benign)
+102,1762003320,185.40.4.0/24,202134,B06,provider_aggregation,easy,True,benign,benign,0.25,False,10,1,0.0764,,0.0788,18077.3089,1.0421,18078.4298,origin AS6762 / AS202134 are in an upstream relation (often benign)
+103,1762003335,185.40.4.0/24,202134,B06,provider_aggregation,easy,True,benign,benign,0.25,False,10,1,0.0755,,0.0779,18281.4059,1.044,18282.5278,origin AS6762 / AS202134 are in an upstream relation (often benign)
+104,1762003367,41.188.128.0/24,36974,B0301,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0243,,0.0248,18709.2018,0.3603,18709.5869,no active multi-origin conflict
+105,1762003370,185.40.4.0/24,202134,B06,provider_aggregation,easy,True,benign,benign,0.25,False,10,1,0.067,,0.0681,18817.1721,0.7999,18818.04,origin AS6762 / AS202134 are in an upstream relation (often benign)
+106,1762003420,185.40.4.0/24,202134,B06,provider_aggregation,easy,True,benign,benign,0.25,False,10,1,0.0518,,0.0529,18944.55,0.6669,18945.2698,origin AS6762 / AS202134 are in an upstream relation (often benign)
+107,1762003510,119.160.96.0/24,24499,B0310,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0575,,0.0585,17958.1122,1.004,17959.1747,no active multi-origin conflict
+108,1762003557,102.67.200.0/24,37662,B0300,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0719,,0.0733,19101.815,1.0018,19102.8902,no active multi-origin conflict
+109,1762003576,182.176.0.0/24,17557,B0313,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0461,,0.048,18177.4218,0.7322,18178.202,no active multi-origin conflict
+110,1762003700,41.75.112.0/24,36924,A04b,steady_single_origin,hard,True,benign,benign,,False,,,0.027,,0.0275,18403.367,0.432,18403.8265,no active multi-origin conflict
+111,1762003700,202.69.160.0/24,23456,A06,as_trans_origin,easy,True,anomalous,anomalous,0.8,True,11,1,0.7635,0.8743,1.6378,18002.5759,1.0562,18005.2698,special-purpose origin ASN: AS23456 (as_trans)
+112,1762003740,202.69.160.0/24,23456,A06,as_trans_origin,easy,True,anomalous,anomalous,0.8,False,11,1,0.0415,,0.0422,19440.1579,0.5193,19440.7194,special-purpose origin ASN: AS23456 (as_trans)
+113,1762003755,41.75.112.0/24,36924,A04b,steady_single_origin,hard,True,benign,benign,,False,,,0.0498,,0.0514,18958.3359,0.9241,18959.3114,no active multi-origin conflict
+114,1762003821,102.67.200.0/24,37662,B0300,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0471,,0.048,18940.3179,0.618,18940.9838,no active multi-origin conflict
+115,1762003849,41.188.128.0/24,36974,B0301,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0536,,0.0545,19004.57,0.73,19005.3545,no active multi-origin conflict
+116,1762003881,102.67.200.0/24,37662,B0300,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0586,,0.06,19084.2311,1.0557,19085.3469,no active multi-origin conflict
+117,1762003966,182.176.0.0/24,17557,B0313,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0582,,0.059,19162.3089,0.8631,19163.231,no active multi-origin conflict
+118,1762004000,41.75.112.0/24,199524,A04b,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,True,12,1,0.8292,0.8602,1.6894,19665.185,1.0197,19667.8941,no distinguishing evidence either way
+119,1762004012,41.75.112.0/24,199524,A04b,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,12,1,0.083,,0.0854,19742.033,1.0259,19743.1443,no distinguishing evidence either way
+120,1762004040,41.75.112.0/24,199524,A04b,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,12,1,0.0218,,0.0221,19817.77,0.3719,19818.164,no distinguishing evidence either way
+121,1762004095,41.75.112.0/24,199524,A04b,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,12,1,0.0672,,0.0695,20316.9889,0.9251,20317.9835,no distinguishing evidence either way
+122,1762004183,110.93.192.0/24,17557,B0312,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0589,,0.0622,20974.9272,0.9308,20975.9201,no active multi-origin conflict
+123,1762004190,182.176.0.0/24,17557,B0313,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0405,,0.0417,21129.1358,0.6042,21129.7817,no active multi-origin conflict
+124,1762004200,100.64.12.0/24,38193,A07,bogon_single_origin,easy,False,anomalous,benign,,False,,,0.0478,,0.0487,20201.1471,0.6979,20201.8936,no active multi-origin conflict
+125,1762004350,100.64.12.0/24,17557,A07,bogon_moas,easy,True,anomalous,anomalous,0.7,True,13,1,0.8117,0.8793,1.691,20274.5261,0.7999,20277.0171,prefix is not globally routable space
+126,1762004370,100.64.12.0/24,38193,A07,bogon_moas,easy,True,anomalous,anomalous,0.7,False,13,1,0.0798,,0.0821,20404.3691,0.9239,20405.3751,prefix is not globally routable space
+127,1762004410,100.64.12.0/24,17557,A07,bogon_moas,easy,True,anomalous,anomalous,0.7,False,13,1,0.0651,,0.0666,21300.354,1.1771,21301.5977,prefix is not globally routable space
+128,1762004493,110.93.192.0/24,17557,B0312,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0379,,0.039,20809.037,0.5529,20809.6288,no active multi-origin conflict
+129,1762004500,45.223.10.0/24,9541,B09,steady_single_origin,hard,True,benign,benign,,False,,,0.0276,,0.0284,20632.6139,0.3798,20633.0221,no active multi-origin conflict
+130,1762004540,45.223.10.0/24,9541,B09,steady_single_origin,hard,True,benign,benign,,False,,,0.0629,,0.0638,21457.7909,0.9961,21458.8508,no active multi-origin conflict
+131,1762004779,110.93.192.0/24,17557,B0312,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0664,,0.0679,21282.9111,1.034,21284.013,no active multi-origin conflict
+132,1762004860,91.198.174.0/24,14907,B12,origin_change_no_overlap,easy,True,benign,benign,,False,,,0.0921,,0.094,21481.5643,0.9899,21482.6482,no active multi-origin conflict
+133,1762004920,91.198.174.0/24,14907,B12,origin_change_no_overlap,easy,True,benign,benign,,False,,,0.0612,,0.063,22305.7947,1.0281,22306.8858,no active multi-origin conflict
+134,1762004958,23.235.32.0/24,54113,B0303,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0707,,0.0729,22792.1889,1.056,22793.3178,no active multi-origin conflict
+135,1762005000,45.223.11.0/24,9541,A08,steady_single_origin,hard,True,benign,benign,,False,,,0.067,,0.0689,23106.982,1.0359,23108.0868,no active multi-origin conflict
+136,1762005060,1.1.1.0/24,13335,A01,after_hijack_aged_out,easy,True,benign,benign,,True,,,0.5991,0.6948,1.294,23178.5569,0.7911,23180.6419,no active multi-origin conflict
+137,1762005060,45.223.11.0/24,9541,A08,steady_single_origin,hard,True,benign,benign,,False,,,0.0547,,0.0561,25392.123,0.7911,25392.9702,no active multi-origin conflict
+138,1762005072,23.235.32.0/24,54113,B0303,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0651,,0.0668,25763.5229,0.9601,25764.5498,no active multi-origin conflict
+139,1762005100,180.92.160.0/24,45595,A05b,steady_single_origin,easy,True,benign,benign,,False,,,0.0686,,0.0711,22848.3107,1.0681,22849.4499,no active multi-origin conflict
+140,1762005100,45.223.10.0/24,32787,B09,ddos_scrubbing_diversion,hard,True,benign,anomalous,0.8,True,14,1,0.8784,1.0202,1.8986,22914.2959,0.8149,22917.0094,origin(s) AS32787 not authorised for this watched prefix
+141,1762005112,45.223.10.0/24,32787,B09,ddos_scrubbing_diversion,hard,True,benign,anomalous,0.8,False,14,1,0.0807,,0.083,23524.452,1.0171,23525.5521,origin(s) AS32787 not authorised for this watched prefix
+142,1762005150,45.223.10.0/24,32787,B09,ddos_scrubbing_diversion,hard,True,benign,anomalous,0.8,False,14,1,0.0727,,0.0737,25319.968,0.917,25320.9586,origin(s) AS32787 not authorised for this watched prefix
+143,1762005170,180.92.160.0/24,45595,A05b,steady_single_origin,easy,True,benign,benign,,False,,,0.0623,,0.0637,23575.0008,0.8943,23575.9587,no active multi-origin conflict
+144,1762005200,45.223.10.0/24,32787,B09,ddos_scrubbing_diversion,hard,True,benign,anomalous,0.8,False,14,1,0.0742,,0.0755,26259.2077,1.0004,26260.2837,origin(s) AS32787 not authorised for this watched prefix
+145,1762005200,37.156.40.0/24,12880,B13,provider_aggregation,easy,True,benign,benign,,False,,,0.0685,,0.0709,24332.031,1.065,24333.1669,no active multi-origin conflict
+146,1762005230,37.156.40.0/24,49100,B13,provider_aggregation,easy,True,benign,benign,0.25,True,16,1,0.889,0.8422,1.7312,26942.379,0.833,26944.9432,origin AS12880 / AS49100 are in an upstream relation (often benign)
+147,1762005260,37.156.40.0/24,49100,B13,provider_aggregation,easy,True,benign,benign,0.25,False,16,1,0.0638,,0.0662,27111.6309,0.7682,27112.4653,origin AS12880 / AS49100 are in an upstream relation (often benign)
+148,1762005326,203.99.48.0/24,23674,B0314,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0329,,0.0336,26487.5748,0.5381,26488.1465,no active multi-origin conflict
+149,1762005360,1.1.1.0/24,13335,A01,steady_single_origin,easy,True,benign,benign,,False,,,0.0525,,0.0542,25559.3679,0.8452,25560.2673,no active multi-origin conflict
+150,1762005400,196.49.4.0/24,37271,A04c,steady_single_origin,hard,True,benign,benign,,False,,,0.0693,,0.0718,24629.5059,1.03,24630.6077,no active multi-origin conflict
+151,1762005425,203.99.48.0/24,23674,B0314,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0545,,0.056,27359.2961,0.783,27360.1351,no active multi-origin conflict
+152,1762005455,196.49.4.0/24,37271,A04c,steady_single_origin,hard,True,benign,benign,,False,,,0.0424,,0.0432,27794.7311,0.5739,27795.3483,no active multi-origin conflict
+153,1762005500,180.92.160.0/24,64512,A05b,private_asn_origin,easy,True,anomalous,anomalous,0.65,True,15,1,0.9794,0.9063,1.8857,26085.609,1.025,26088.5196,special-purpose origin ASN: AS64512 (private); origin AS45595 / AS64512 are in an upstream relation (often benign)
+154,1762005500,45.223.11.0/24,9541,A08,forged_origin_path_hijack,hard,False,anomalous,benign,,False,,,0.0729,,0.0752,25273.9251,0.9837,25274.984,no active multi-origin conflict
+155,1762005506,45.223.11.0/24,9541,A08,forged_origin_path_hijack,hard,False,anomalous,benign,,False,,,0.0698,,0.0722,25415.03,1.0231,25416.1252,no active multi-origin conflict
+156,1762005520,180.92.160.0/24,64512,A05b,private_asn_origin,easy,True,anomalous,anomalous,0.65,False,15,1,0.0545,,0.0558,26247.8631,0.751,26248.6699,special-purpose origin ASN: AS64512 (private); origin AS45595 / AS64512 are in an upstream relation (often benign)
+157,1762005530,45.223.11.0/24,9541,A08,forged_origin_path_hijack,hard,False,anomalous,benign,,False,,,0.0646,,0.066,25991.4401,0.9201,25992.4261,no active multi-origin conflict
+158,1762005570,180.92.160.0/24,64512,A05b,private_asn_origin,easy,True,anomalous,anomalous,0.65,False,15,1,0.0718,,0.0737,27138.6948,0.823,27139.5915,special-purpose origin ASN: AS64512 (private); origin AS45595 / AS64512 are in an upstream relation (often benign)
+159,1762005580,45.223.11.0/24,9541,A08,forged_origin_path_hijack,hard,False,anomalous,benign,,False,,,0.0417,,0.0425,26583.3638,0.524,26583.9303,no active multi-origin conflict
+160,1762005700,196.49.4.0/24,263702,A04c,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,True,17,1,0.795,0.8805,1.6755,27435.107,0.488,27437.2705,no distinguishing evidence either way
+161,1762005708,23.235.32.0/24,54113,B0303,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0362,,0.037,26428.319,0.4261,26428.782,no active multi-origin conflict
+162,1762005708,203.99.48.0/24,23674,B0314,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0434,,0.0442,27385.715,0.5522,27386.3114,no active multi-origin conflict
+163,1762005712,196.49.4.0/24,263702,A04c,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,17,1,0.0497,,0.0505,27451.4587,0.6611,27452.1704,no distinguishing evidence either way
+164,1762005740,196.49.4.0/24,263702,A04c,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,17,1,0.0762,,0.0782,28077.6429,0.9871,28078.7081,no distinguishing evidence either way
+165,1762005795,196.49.4.0/24,263702,A04c,exact_hijack_unwatched,hard,True,anomalous,uncertain,0.4,False,17,1,0.0513,,0.0521,28269.192,0.6101,28269.8542,no distinguishing evidence either way
+166,1762006000,46.19.36.0/24,39351,A11,steady_single_origin,hard,True,benign,benign,,False,,,0.0407,,0.0417,26795.222,0.6039,26795.8676,no active multi-origin conflict
+167,1762006080,46.19.36.0/24,39351,A11,steady_single_origin,hard,True,benign,benign,,False,,,0.0565,,0.0589,26870.5859,0.8621,26871.507,no active multi-origin conflict
+168,1762006100,37.156.40.0/24,12880,B13,provider_aggregation,easy,True,benign,benign,0.25,False,16,1,0.0565,,0.0575,26947.7668,0.7441,26948.5683,origin AS12880 / AS49100 are in an upstream relation (often benign)
+169,1762006500,23.192.0.0/24,20940,B11,sibling_origins_unwatched,hard,True,benign,benign,,False,,,0.049,,0.0501,27719.1079,0.7172,27719.8752,no active multi-origin conflict
+170,1762006520,23.192.0.0/24,16625,B11,sibling_origins_unwatched,hard,True,benign,uncertain,0.4,True,18,1,0.9146,0.8597,1.7743,27843.498,0.689,27845.9613,no distinguishing evidence either way
+171,1762006545,23.192.0.0/24,20940,B11,sibling_origins_unwatched,hard,True,benign,uncertain,0.4,False,18,1,0.0653,,0.0662,27920.0549,0.8092,27920.9303,no distinguishing evidence either way
+172,1762006590,23.192.0.0/24,16625,B11,sibling_origins_unwatched,hard,True,benign,uncertain,0.4,False,18,1,0.029,,0.0296,27871.243,0.3641,27871.6367,no distinguishing evidence either way
+173,1762006640,23.192.0.0/24,20940,B11,sibling_origins_unwatched,hard,True,benign,uncertain,0.4,False,18,1,0.0819,,0.0835,28100.565,0.9699,28101.6183,no distinguishing evidence either way
+174,1762006700,46.19.36.0/24,211398,A11,hijack_forged_adjacency,hard,True,anomalous,benign,0.25,True,19,1,0.8068,0.8373,1.644,28760.741,0.5739,28762.9589,origin AS39351 / AS211398 are in an upstream relation (often benign)
+175,1762006700,23.192.0.0/24,16625,B11,sibling_origins_unwatched,hard,True,benign,uncertain,0.4,False,18,1,0.059,,0.0599,29597.8472,0.7367,29598.6439,no distinguishing evidence either way
+176,1762006715,46.19.36.0/24,211398,A11,hijack_forged_adjacency,hard,True,anomalous,benign,0.25,False,19,1,0.052,,0.0529,28723.6841,0.51,28724.247,origin AS39351 / AS211398 are in an upstream relation (often benign)
+177,1762006760,46.19.36.0/24,211398,A11,hijack_forged_adjacency,hard,True,anomalous,benign,0.25,False,19,1,0.0772,,0.0795,29454.5712,0.9999,29455.6507,origin AS39351 / AS211398 are in an upstream relation (often benign)
+178,1762006790,46.19.36.0/24,211398,A11,hijack_forged_adjacency,hard,True,anomalous,benign,0.25,False,19,1,0.0763,,0.0783,29753.69,0.9348,29754.7031,origin AS39351 / AS211398 are in an upstream relation (often benign)
+179,1762007000,45.223.12.0/24,9541,A13,steady_single_origin,easy,True,benign,benign,,False,,,0.073,,0.075,28498.5359,0.9842,28499.5951,no active multi-origin conflict
+180,1762007045,45.223.12.0/24,9541,A13,steady_single_origin,easy,True,benign,benign,,False,,,0.0811,,0.0832,28779.501,1.055,28780.6391,no active multi-origin conflict
+181,1762007087,157.240.1.0/24,32934,B0305,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0722,,0.0744,28155.3721,1.0009,28156.4474,no active multi-origin conflict
+182,1762007399,157.240.1.0/24,32934,B0305,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0748,,0.0767,28856.6389,0.9789,28857.6945,no active multi-origin conflict
+183,1762007563,157.240.1.0/24,32934,B0305,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.077,,0.0785,28923.8269,0.952,28924.8574,no active multi-origin conflict
+184,1762007797,58.65.128.0/24,38547,B0309,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0704,,0.0729,28120.703,1.0169,28121.7927,no active multi-origin conflict
+185,1762007800,45.223.12.0/24,140224,A13,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,True,20,1,0.6473,0.6719,1.3192,29582.2361,0.9379,29584.4932,origin(s) AS140224 not authorised for this watched prefix
+186,1762007803,45.223.12.0/24,140224,A13,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,20,1,0.0681,,0.0695,29694.2461,0.854,29695.1696,origin(s) AS140224 not authorised for this watched prefix
+187,1762007845,45.223.12.0/24,140224,A13,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,20,1,0.043,,0.0438,29671.1562,0.5388,29671.7388,origin(s) AS140224 not authorised for this watched prefix
+188,1762007900,45.223.12.0/24,140224,A13,exact_hijack_watched,easy,True,anomalous,anomalous,0.8,False,20,1,0.0833,,0.0857,30117.1057,0.9952,30118.1866,origin(s) AS140224 not authorised for this watched prefix
+189,1762008171,140.82.112.0/24,36459,B0304,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0611,,0.063,30550.4169,0.845,30551.3249,no active multi-origin conflict
+190,1762008195,58.65.128.0/24,38547,B0309,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0643,,0.0652,30171.2172,0.8326,30172.115,no active multi-origin conflict
+191,1762008199,58.65.128.0/24,38547,B0309,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0727,,0.075,31005.6961,0.999,31006.7701,no active multi-origin conflict
+192,1762008464,140.82.112.0/24,36459,B0304,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0418,,0.0428,30440.599,0.5829,30441.2247,no active multi-origin conflict
+193,1762008797,140.82.112.0/24,36459,B0304,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0154,,0.0157,31227.073,0.277,31227.3657,no active multi-origin conflict
+194,1762008804,31.13.64.0/24,32934,B0302,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0302,,0.0313,30355.6111,0.4559,30356.0982,no active multi-origin conflict
+195,1762008947,31.13.64.0/24,32934,B0302,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0608,,0.0621,31331.423,0.7298,31332.2149,no active multi-origin conflict
+196,1762008952,39.32.0.0/24,45595,B0308,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0662,,0.0677,30406.4729,1.045,30407.5856,no active multi-origin conflict
+197,1762009160,37.156.40.0/24,12880,B13,moas_ended,easy,True,benign,benign,,True,,,0.8462,0.8153,1.6615,32106.111,0.8001,32108.5726,no active multi-origin conflict
+198,1762009216,39.32.0.0/24,45595,B0308,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0362,,0.037,32087.739,0.5028,32088.2788,no active multi-origin conflict
+199,1762009260,37.156.40.0/24,12880,B13,steady_single_origin,easy,True,benign,benign,,False,,,0.0691,,0.0713,32385.4799,0.859,32386.4103,no active multi-origin conflict
+200,1762009414,39.32.0.0/24,45595,B0308,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0685,,0.0703,32470.551,1.0629,32471.6841,no active multi-origin conflict
+201,1762009582,31.13.64.0/24,32934,B0302,steady_single_origin_unwatched,easy,True,benign,benign,,False,,,0.0618,,0.0639,31475.847,0.824,31476.7349,no active multi-origin conflict

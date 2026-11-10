@@ -51,3 +51,9 @@ are never flagged. If one attack announces both forms, you get two alerts (one p
 
 
 Windows users: follow WINDOWS_SETUP.md (venv, CUDA torch, env vars, check_setup.py).
+
+## Stream latency + accuracy evaluation (`evaluation/`)
+    python evaluation/evaluate.py --mode offline [--mock]   # 200 labelled updates through detector -> classify, in-process
+    python evaluation/evaluate.py --mode online  [--mock]   # same stream over a websocket (RIS Live protocol) + real RIS Live delay probe
+Per-update decision and anomaly type vs. ground truth (rule-only, B2 and the full pipeline), time to decision, queueing
+under load, time-to-detect per hijack episode. Results in `evaluation/results/`. Details: `evaluation/README.md`.

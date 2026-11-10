@@ -60,3 +60,9 @@ closures trigger a re-score. A backend that errors (e.g. model server down) is r
   run against a real model yet.
 - No RPKI/IRR validation yet; the model decides from path/peer evidence plus the whitelist.
 - The FYP-I experiments (precision, false positives, baseline vs model on labelled events) are still to be done.
+
+## Latency + accuracy evaluation (`evaluation/`)
+    python evaluation/evaluate.py --mode offline        # 202 labelled updates, in-process
+    python evaluation/evaluate.py --mode online         # same stream over a websocket (RIS Live protocol) + real RIS Live delay probe
+Per-update decision vs. ground truth, time to decision (catalog / AI layer / end-to-end), time-to-detect per anomalous
+episode. Results in `evaluation/results/` (`summary.md` compares runs). Details: `evaluation/README.md`.
