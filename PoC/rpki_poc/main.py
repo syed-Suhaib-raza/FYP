@@ -1,141 +1,163 @@
-"""main.py - RPKI Invalid detector for Cybernet (deterministic, external routing anomalies)."""
+"""main.py - RPKI Invalid detector for Cybernet (deterministic, external routing anomalies).
 
-import argparse                                     # reads --demo from the command line
-import time                                         # used to decide when to refresh VRPs
-from collections import Counter                     # counts how many routes ended in each state
+    python main.py --demo                    # offline demo: demo_data/ -> demo.db (no Routinator, no internet)
+    python main.py                           # live: Routinator + RIPE RIS Live -> rpki.db
+    python -m streamlit run dashboard.py     # in a second window (add  -- --db demo.db  for the demo)
 
-import requests                                     # HTTP calls to Routinator (cross-check, refresh errors)
+Options: --db FILE, --min-peers N, --no-cross-check, --no-revalidate, --delay S (demo speed)
+"""
 
-import config                                       # our settings file
-from alert_store import AlertStore                  # de-duplicates and saves alerts
-from bgp_feed import demo_events, live_events       # where BGP routes come from
-from validator import INVALID_ML, validate_route    # the deterministic engine
-from vrp_store import VrpStore                      # where RPKI truth comes from
+import argparse
+import json
+import os
+import time
 
+import requests
 
-def load_vrps(demo: bool) -> VrpStore:
-    """Demo: read the small test file. Live: download from Routinator."""
-    if demo:                                        # --demo was given
-        return VrpStore.from_file(config.DEMO_VRP_FILE)
-    return VrpStore.from_routinator(config.ROUTINATOR_JSON_URL)    # live Routinator /json
+import config
+from bgp_feed import LiveFeed, replay_events
+from engine import RpkiDetector
+from store import Store
+from vrp_store import VrpStore
 
-
-def touches_cybernet(result, origin_asn) -> bool:
-    """True if Cybernet originates the route, or the route lies inside a Cybernet ROA."""
-    if origin_asn in config.MONITORED_ASNS:         # Cybernet is the origin
-        return True
-    return any(v.asn in config.MONITORED_ASNS for v in result.covering_vrps)   # inside Cybernet's ROA
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
-def assess_impact(result) -> tuple[str, str, str]:
-    """Map a deterministic result to (severity, likely meaning, suggested action)."""
-    ours = result.origin_asn in config.MONITORED_ASNS          # is Cybernet itself the origin?
-    if ours and result.state == INVALID_ML:         # Cybernet's own route, too specific
-        return ("HIGH",
-                "Cybernet announces a more-specific prefix than its ROA MaxLength allows "
-                "(APNIC: the most common cause of RPKI Invalid).",
-                "Raise MaxLength in the ROA via MyAPNIC, or stop announcing the more-specific.")
-    if ours:                                        # Cybernet originates a prefix whose ROA names another AS
-        return ("HIGH",
-                "Cybernet originates a prefix whose ROA authorises a different AS "
-                "(for example a customer or leased block).",
-                "Ask the prefix holder to add a ROA for AS9541/AS24440, or stop originating it.")
-    return ("CRITICAL",                             # someone else originates Cybernet space
-            "Another network originates Cybernet address space: possible hijack, or a leasing / "
-            "DDoS-scrubbing arrangement missing from the ROA (Noction: invalid is not always a hijack).",
-            "Identify the origin AS. If it is not a known partner, treat as a hijack and alert upstreams.")
+def path_here(p):
+    return p if os.path.isabs(p) else os.path.join(HERE, p)
+
+
+def load_json(path, default):
+    p = path_here(path)
+    if not os.path.exists(p):
+        return default
+    with open(p, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def load_live_vrps() -> VrpStore:
+    return VrpStore.from_routinator(config.ROUTINATOR_JSON_URL, config.ROUTINATOR_JSON_FALLBACK_URL)
 
 
 def routinator_cross_check(prefix: str, origin_asn: int | None) -> dict | None:
     """Ask Routinator for its own verdict on this route (an independent second opinion)."""
     if origin_asn is None:                          # the API needs one origin AS (not an AS_SET)
         return None
-    url = f"{config.ROUTINATOR_VALIDITY_URL}/AS{origin_asn}/{prefix}"   # /api/v1/validity/AS<n>/<prefix>
     try:
-        body = requests.get(url, timeout=10).json() # call Routinator and parse its JSON answer
+        body = requests.get(f"{config.ROUTINATOR_VALIDITY_URL}/AS{origin_asn}/{prefix}", timeout=10).json()
     except (requests.RequestException, ValueError) as exc:
-        return {"error": repr(exc)}                 # record the failure instead of crashing
-    route = body.get("validated_route") or (body.get("validated_routes") or [{}])[0]   # accept both shapes
-    validity = route.get("validity", {})            # holds "state" and "reason"
-    return {"state": validity.get("state"), "reason": validity.get("reason")}   # e.g. invalid / length
+        return {"error": repr(exc)}
+    route = body.get("validated_route") or (body.get("validated_routes") or [{}])[0]
+    validity = route.get("validity", {})
+    return {"state": validity.get("state"), "reason": validity.get("reason")}
 
 
-def print_alert(alert: dict) -> None:
-    """Show a new or reopened alert on the screen."""
-    print(f"\n[{alert['severity']}] {alert['alert_id']}  {alert['state']}  "
-          f"{alert['prefix']} originated by AS{alert['origin_asn']}")
-    print(f"   why    : {alert['explanation']}")
-    print(f"   meaning: {alert['likely_meaning']}")
-    print(f"   action : {alert['suggested_action']}")
-    if alert.get("routinator_cross_check"):         # only present in live mode
-        print(f"   routinator says: {alert['routinator_cross_check']}")
+def show(out: dict) -> None:
+    if out["kind"] == "roa":
+        c = out["change"]
+        print(f"\n[ROA {c['severity']}] {c['change']} {c['prefix']} AS{c['asn']}: {c['detail']}", flush=True)
+        return
+    a, ev = out["alert"], out["event"]
+    origin = f"AS{a['origin_asn']}" if a["origin_asn"] is not None else "AS_SET"
+    if ev == "RESOLVED":
+        print(f"\n[RESOLVED] {a['alert_id']} {a['prefix']} {origin} {a['state']}", flush=True)
+        return
+    print(f"\n[{a['severity']}] {a['alert_id']} {ev} {a['state']} ({a['cause']}) {a['prefix']} originated by {origin}, "
+          f"seen by {a['seen_by_peers']} RIS peers", flush=True)
+    print(f"   why    : {a['explanation']}")
+    print(f"   meaning: {a['likely_meaning']}")
+    print(f"   action : {a['suggested_action']}")
+    if a.get("routinator_check"):
+        print(f"   routinator says: {a['routinator_check']}")
 
 
-def print_resolved(alerts: list[dict]) -> None:
-    """Show alerts that just closed."""
-    for alert in alerts:
-        print(f"\n[RESOLVED] {alert['alert_id']} {alert['prefix']} AS{alert['origin_asn']} "
-              f"no longer seen by any RIS peer")
+def write_status(store, det, vrps, vrp_ok_at, mode):
+    store.set_meta(mode=mode, vrp_source=vrps.source, vrp_count=vrps.count, vrp_generated=vrps.generated_time,
+                   vrp_loaded_at=vrp_ok_at, vrp_stale=(time.time() - vrp_ok_at) > config.VRP_STALE_SECONDS if mode == "live" else False,
+                   updated_at=time.time(), min_peers=det.min_peers, **det.status())
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Cybernet RPKI Invalid detector (PoC)")
-    parser.add_argument("--demo", action="store_true", help="use demo_data/ instead of live sources")
-    args = parser.parse_args()                      # args.demo is True or False
+    p = argparse.ArgumentParser(description="Cybernet RPKI Invalid detector (PoC)")
+    p.add_argument("--demo", action="store_true", help="use demo_data/ instead of live sources")
+    p.add_argument("--db", help=f"SQLite file (default {config.DB_FILE}, demo: {config.DEMO_DB_FILE})")
+    p.add_argument("--min-peers", type=int, default=config.MIN_PEERS)
+    p.add_argument("--no-cross-check", action="store_true", help="do not ask Routinator /validity for a second opinion")
+    p.add_argument("--no-revalidate", action="store_true", help="do NOT re-check routes when the VRPs change (ablation)")
+    p.add_argument("--delay", type=float, default=0.3, help="demo: seconds between replayed messages")
+    a = p.parse_args()
 
-    store = load_vrps(args.demo)                    # STEP 1: load the RPKI truth
-    our_prefixes = store.prefixes_for_asns(config.MONITORED_ASNS)   # Cybernet's ROA-covered prefixes
-    print(f"[vrp] loaded {store.count} VRPs from {store.source} (generated {store.generated_time})")
-    print(f"[vrp] {len(our_prefixes)} ROA-covered prefixes belong to ASNs {sorted(config.MONITORED_ASNS)}")
-    for p in our_prefixes[:20]:                     # show up to 20 of them
-        print(f"      {p}")
+    db = path_here(a.db or (config.DEMO_DB_FILE if a.demo else config.DB_FILE))
+    if a.demo:                                      # each demo run starts clean
+        for s in ("", "-wal", "-shm"):
+            if os.path.exists(db + s):
+                os.remove(db + s)
+    store = Store(db, log_path=path_here(config.ALERT_LOG))
+    whitelist = load_json(config.DEMO_WHITELIST_FILE if a.demo else config.WHITELIST_FILE, {})
+    customers = set(load_json(config.DEMO_CUSTOMERS_FILE if a.demo else config.CUSTOMERS_FILE, []))
 
-    alerts = AlertStore(config.ALERT_FILE)          # STEP 2: prepare the alert store
-    events = (demo_events(config.DEMO_UPDATES_FILE) if args.demo        # STEP 3: choose the BGP source
-              else live_events(our_prefixes, config.MONITORED_ASNS, config.RIS_LIVE_URL))
-    counts = Counter()                              # statistics for the summary
-    last_refresh = time.time()                      # when VRPs were last loaded
+    vrps = VrpStore.from_file(path_here(config.DEMO_VRP_FILE)) if a.demo else load_live_vrps()
+    vrp_ok_at = time.time()
+    cross = None if (a.demo or a.no_cross_check or not config.CROSS_CHECK_WITH_ROUTINATOR) else routinator_cross_check
+    det = RpkiDetector(vrps, store, whitelist, customers, config.MONITORED_ASNS, a.min_peers,
+                       revalidate=not a.no_revalidate, cross_check=cross, source="demo" if a.demo else "live",
+                       warn_hours=config.ROA_EXPIRY_WARN_HOURS)
+
+    roa_pfx = vrps.prefixes_for_asns(config.MONITORED_ASNS)
+    print(f"[vrp] loaded {vrps.count} VRPs from {vrps.source} (generated {vrps.generated_time})")
+    print(f"[vrp] {len(roa_pfx)} ROA prefixes for {sorted(config.MONITORED_ASNS)}; whitelist {len(whitelist)} prefixes; "
+          f"{len(customers)} customer ASNs; alert after {det.min_peers} RIS peers")
+    outs, _ = det.reload_vrps(vrps, time.time())   # same set again: only reports ROAs that are about to expire
+    for o in outs:
+        show(o)
+
+    def watched_prefixes():                         # whitelist + Cybernet ROA prefixes (recomputed on reconnect)
+        nets = {str(n) for n in det.vrps.prefixes_for_asns(config.MONITORED_ASNS)} | set(whitelist)
+        return sorted(nets)
+
+    feed = (replay_events(path_here(config.DEMO_UPDATES_FILE), a.delay) if a.demo
+            else LiveFeed(config.RIS_LIVE_URL, watched_prefixes, config.MONITORED_ASNS))
+    last_refresh = last_status = time.time()
+    write_status(store, det, det.vrps, vrp_ok_at, "demo" if a.demo else "live")
 
     try:
-        for event in events:                        # STEP 4: handle every route event as it arrives
-            if not args.demo and time.time() - last_refresh > config.VRP_REFRESH_SECONDS:
-                try:                                # time to reload VRPs (ROAs may have changed)
-                    store = load_vrps(demo=False)
-                    print(f"[vrp] refreshed: {store.count} VRPs")
+        for ev in feed:
+            if ev.kind == "vrp_reload":             # demo: the ROAs change at this point of the replay
+                outs, _ = det.reload_vrps(VrpStore.from_file(path_here(os.path.join("demo_data", ev.file))), ev.timestamp)
+                print(f"\n[vrp] demo: loaded {ev.file}")
+                for o in outs:
+                    show(o)
+                continue
+            if not a.demo and time.time() - last_refresh > config.VRP_REFRESH_SECONDS:
+                last_refresh = time.time()
+                try:
+                    new = load_live_vrps()
+                    vrp_ok_at = time.time()
+                    outs, pfx_changed = det.reload_vrps(new, vrp_ok_at)
+                    print(f"[vrp] refreshed: {new.count} VRPs", flush=True)
+                    for o in outs:
+                        show(o)
+                    if pfx_changed:
+                        feed.resubscribe()
                 except requests.RequestException as exc:
-                    print(f"[vrp] refresh failed, keeping old VRPs: {exc!r}")
-                last_refresh = time.time()          # try again after another interval
-
-            prefix = str(event.prefix)              # prefix as text, the alert key uses text
-            if event.kind == "withdraw":            # the peer removed the route
-                print_resolved(alerts.record_gone(prefix, event.collector, event.peer))
-                continue                            # nothing to validate for a withdrawal
-
-            result = validate_route(event.prefix, event.origin_asn, store)   # STEP 5: deterministic check
-            counts[result.state] += 1               # count VALID / NOT_FOUND / INVALID_*
-
-            if not (result.is_invalid and touches_cybernet(result, event.origin_asn)):
-                print_resolved(alerts.record_gone(prefix, event.collector, event.peer))  # peer's route is fine now
-                continue                            # no alert needed
-
-            key = AlertStore.key_of(result)         # STEP 6: this route is Invalid and concerns Cybernet
-            print_resolved(alerts.record_gone(prefix, event.collector, event.peer, keep_key=key))
-
-            check = None                            # Routinator's second opinion (live, first sighting only)
-            if config.CROSS_CHECK_WITH_ROUTINATOR and not args.demo and not alerts.is_known(key):
-                check = routinator_cross_check(prefix, event.origin_asn)
-
-            severity, meaning, action = assess_impact(result)            # STEP 7: how serious is it?
-            alert, changed = alerts.record_invalid(result, event, severity, meaning, action, check)
-            if changed:                             # new or reopened -> show it
-                print_alert(alert)
-    except KeyboardInterrupt:                       # Ctrl+C stops live mode cleanly
+                    print(f"[vrp] refresh failed, keeping old VRPs: {exc!r}", flush=True)
+                if time.time() - vrp_ok_at > config.VRP_STALE_SECONDS:
+                    print(f"[vrp] WARNING: VRPs are {(time.time() - vrp_ok_at) / 60:.0f} min old; is Routinator running?")
+            if ev.kind != "tick":
+                for o in det.process(ev):
+                    show(o)
+            if time.time() - last_status > 5:
+                last_status = time.time()
+                write_status(store, det, det.vrps, vrp_ok_at, "demo" if a.demo else "live")
+    except KeyboardInterrupt:
         print("\n[main] stopped by user")
-    finally:                                        # always print a summary at the end
-        print(f"\n[summary] routes checked by state: {dict(counts)}")
-        active = sum(1 for a in alerts.alerts.values() if a["status"] == "ACTIVE")
-        print(f"[summary] alerts: {len(alerts.alerts)} total, {active} still active -> {config.ALERT_FILE}")
+    finally:
+        write_status(store, det, det.vrps, vrp_ok_at, "demo" if a.demo else "live")
+        s = det.status()
+        print(f"\n[summary] announcements by RPKI state: {s['state_counts']}")
+        print(f"[summary] alerts: {s['alerts_active']} active, {s['alerts_resolved']} resolved, "
+              f"{s['alerts_pending']} pending -> {db}")
 
 
-if __name__ == "__main__":                          # run main() only when started as a program
+if __name__ == "__main__":
     main()

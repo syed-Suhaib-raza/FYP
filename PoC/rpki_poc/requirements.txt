@@ -1,0 +1,6 @@
+requests>=2.28            # Routinator HTTP API (VRPs, /validity)
+websocket-client>=1.6     # RIPE RIS Live (live mode)
+streamlit>=1.30           # dashboard.py
+pandas>=2.0               # dashboard.py
+pytest>=7.0               # tests
+websockets>=11.0          # evaluation online mode only

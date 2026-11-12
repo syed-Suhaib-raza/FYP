@@ -1,0 +1,32 @@
+{
+ "metadata": {
+  "generated": 1762000000,
+  "generatedTime": "2025-11-01T12:26:40Z"
+ },
+ "roas": [
+  {
+   "asn": "AS9541",
+   "prefix": "72.255.0.0/18",
+   "maxLength": 18,
+   "ta": "apnic"
+  },
+  {
+   "asn": "AS64496",
+   "prefix": "198.51.100.0/24",
+   "maxLength": 24,
+   "ta": "apnic"
+  },
+  {
+   "asn": "AS0",
+   "prefix": "192.0.2.0/24",
+   "maxLength": 24,
+   "ta": "apnic"
+  },
+  {
+   "asn": "AS9541",
+   "prefix": "2001:db8:100::/40",
+   "maxLength": 48,
+   "ta": "apnic"
+  }
+ ]
+}

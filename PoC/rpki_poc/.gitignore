@@ -1,0 +1,6 @@
+# runtime output of main.py / evaluation (do not commit)
+*.db
+*.db-wal
+*.db-shm
+alerts.jsonl
+__pycache__/
